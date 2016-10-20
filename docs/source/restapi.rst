@@ -2,7 +2,7 @@
 
 REST Interface
 ==============
-Generel suff
+foobar
 
 
 Getting Predictions
@@ -10,17 +10,30 @@ Getting Predictions
 
 This is the text
 
-.. http:get:: /users/(int:user_id)/posts/(tag)
+.. http:post:: /v1/(problem)
 
-   The posts tagged with `tag` that the user (`user_id`) wrote.
+   Get a prediction for the problem based on the upload prediction data.
 
    **Example request**:
 
    .. sourcecode:: http
 
-      GET /users/123/posts/web HTTP/1.1
-      Host: example.com
-      Accept: application/json, text/javascript
+      POST /v1/econ-example-problem HTTP/1.1
+      Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC... 
+      Content-Type: application/json
+      Content-Length: 517
+      
+      {
+          "prediction_data": [
+              {
+                  "text": "Taxa receipt"
+              },
+              {
+                  "text": "Business lunch"
+              }
+          ]
+      }
+
 
    **Example response**:
 
@@ -59,4 +72,4 @@ This is the text
 
 Uploading Datasets
 ------------------
-bla bla bla
+TODO

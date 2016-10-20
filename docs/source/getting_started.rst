@@ -1,9 +1,9 @@
 Getting started
 ===============
-The Autosuggest team builds and hosts machine learning solutions used for
-automated decision making within Visma's line of ERP systems. The machine
-learning models are available via a moden :ref:`REST api<restapi-label>` that
-will be described in detail later in this document.
+The machine learning team team builds and hosts machine learning
+solutions used for automated decision making within Visma's line of ERP
+systems. The machine learning models are available via a moden :ref:`REST
+api<restapi-label>` that will be described in detail later in this document.
 
 A minimal example
 -----------------
@@ -24,7 +24,7 @@ to end users. When e-conomic issue a auth token to an end user it is important
 that they set the :code:`iss` claim, so Autosuggest can identify and verify
 the issuer. If the issuer is a known consumer of Autosuggest and the signature
 can be verified custom claims in the content of the JWT token are used by
-autosuggest, an example being :code:`dsl` that describes the location of a
+Autosuggest, an example being :code:`dsl` that describes the location of a
 dataset. Below is an example in python genereting a JWT token with the
 given master credentials, this token will expire 01/01/2017.
 
@@ -45,7 +45,7 @@ given master credentials, this token will expire 01/01/2017.
    print(token)
 
 the variable :code:`token` is a string :code:`eyJhbGciOiJIUzI1NiIsInR5cC...`
-that an end user or e-conomic can use to authenticate against the autosuggest
+that an end user or e-conomic can use to authenticate against the Autosuggest
 prediction related endpoints, the token is transfered in the Authorization
 header and uses the Bearer schema, a request could look like this
 
@@ -64,20 +64,10 @@ header and uses the Bearer schema, a request could look like this
            {
                "text": "Business lunch"
            }
-       ],
-       "training_data": [
-           {
-               "account": 6750,
-               "text": "Taxa to airport"
-           },
-           {
-               "account": 31656,
-               "text": "Lunch with staff"
-           }
        ]
    }
 
-The response from the autosuggest api will in this case look like this, but it
+The response from the Autosuggest api will in this case look like this, but
 the schema of the returned data is model dependend.
 
 .. sourcecode:: http
@@ -103,36 +93,38 @@ the schema of the returned data is model dependend.
        ]
    }
 
-We have seen a minimal example on how autosuggest can be used, but in practice
+We have seen a minimal example on how Autosuggest can be used, but in practice
 the amount of and location to training data introduces some problems. That we
 will discuess below.
 
 
+Locating training data
+----------------------
 
+When predictions are requested training data is needed to train the model,
+the training data can be part of the request or the JWT token can hold
+a URI for the dataset. Examples on DataSet Locations (dsl) are
 
+- :code:`http://user:pass@econ.com/asgtdata/123e4567-e89b-12d3-a456-42665544`
+- :code:`datalake://companies(1423413)/generalledgertransactions?$top=100`
+- :code:`autosuggest://account_2314`
 
-Connecting to data sources
---------------------------
-The call above could be made from a browser by an enduser and we need more data
-
-Therefore some endusers experience Autosuggest as slow. For that reason you
-have set up a webserver in you datacenter that is to host the data sets.
+The schema defines how Autosuggest will locate and retrieve the dataset.
+We call the extensions that knowns how to handle a certen schema for *data
+connectors* and we will develop data connectors as needed based on consumer
+requirements
 
 
 Storing data with Autosuggest
 -----------------------------
 
-The example above works fine, but to get better predictions we need more
-training data, alot more training data. For that reason we have a solution for
-storeing training data in Autosuggest.
+The data connector for the :code:`autosuggest` schema will use Autosuggests
+own dataset storage solution. Master credentials are used to upload datasets
+to the Autosuggest dataset storage solution.
 
-so that loading in training data into models happens under optimal
-circumstances. Furthermore we schema validate the training data set on the
-time of upload so that this (time expensive) step is not done at the time of
-the prediction request.
+The autosuggest dataset storage solution optimzes the uploaded datasets for
+later predictions, so prediction requests using training data stored with
+Autosuggest will answer faster than any other dataset source.
 
-
-
-What’s next?
-------------
-Get in touch or keep reading the documentation
+The usage of the Autosuggest dataset storage solution are documented in the
+:ref:`REST api<restapi-label>` section.
