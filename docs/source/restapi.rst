@@ -2,29 +2,36 @@
 
 REST Interface
 ==============
-foobar
 
 
 Getting Predictions
 -------------------
 
-This is the text
+.. http:post:: /problem/:problem/model/:model
+   :synopsis: Send a new SMS
 
-.. http:post:: /v1/(problem)
+   Get a prediction for :code:`:problem` using :code:`:model`. Authorization
+   with JWT token is required. If a `dsl` claim is present in the content of
+   the JWT token the DataSetLocation will be used as training data for the
+   call.
 
-   Get a prediction for the problem based on the upload prediction data.
+   :reqjson array prediction_data: Array of elements to predict on.
+   :reqjson array training_data: Optinal, array of training data.
 
-   **Example request**:
+   :resjson string feedback: feedback
+
+   :status 200: no error
+   :status 404: there's no user
 
    .. sourcecode:: http
 
-      POST /v1/econ-example-problem HTTP/1.1
+      POST /v1/problem/econ-example HTTP/1.1
       Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC... 
       Content-Type: application/json
       Content-Length: 517
       
       {
-          "prediction_data": [
+          "entries": [
               {
                   "text": "Taxa receipt"
               },
@@ -35,7 +42,6 @@ This is the text
       }
 
 
-   **Example response**:
 
    .. sourcecode:: http
 
@@ -43,31 +49,24 @@ This is the text
       Vary: Accept
       Content-Type: text/javascript
 
-      [
-        {
-          "post_id": 12345,
-          "author_id": 123,
-          "tags": ["server", "web"],
-          "subject": "I tried Nginx"
-        },
-        {
-          "post_id": 12346,
-          "author_id": 123,
-          "tags": ["html5", "standards", "web"],
-          "subject": "We go to HTML 5"
-        }
-      ]
+      {
+        "feedback": "https://autosuggest.com/v1/problem/econ-example/model/experimental-heurestics/feedback",
+        "entries": [
+          {
+            "post_id": 12345,
+            "author_id": 123,
+            "tags": ["server", "web"],
+            "subject": "I tried Nginx"
+          },
+          {
+            "post_id": 12346,
+            "author_id": 123,
+            "tags": ["html5", "standards", "web"],
+            "subject": "We go to HTML 5"
+          }
+        ]
+      }
 
-   :query sort: one of ``hit``, ``created-at``
-   :query offset: offset number. default is 0
-   :query limit: limit number. default is 30
-   :reqheader Accept: the response content type depends on
-                      :mailheader:`Accept` header
-   :reqheader Authorization: optional OAuth token to authenticate
-   :resheader Content-Type: this depends on :mailheader:`Accept`
-                            header of request
-   :statuscode 200: no error
-   :statuscode 404: there's no user
 
 
 Uploading Datasets
