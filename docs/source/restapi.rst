@@ -29,14 +29,11 @@ Getting Predictions
       Content-Length: 517
       
       {
-          "input": [
-              {
-                  "text": "Taxa receipt"
-              },
-              {
-                  "text": "Business lunch"
-              }
-          ]
+          "input": [{
+              "text": "Taxa receipt"
+          }, {
+              "text": "Business lunch"
+          }]
       }
 
 
@@ -48,18 +45,15 @@ Getting Predictions
       Content-Type: text/javascript
 
       {
-        "output": [
-          {
-               "label": {
-                   "account": 6750,
-               },
-               "probability": 0.2
-          },
-          {
-               "label": {
-                   "account": 31656,
-               },
-               "probability": 0.2
-          }
-        ]
+          "output": [{
+              "label": {
+                  "account": 6750
+              },
+              "probability": 0.2
+          }, {
+              "label": {
+                  "account": 31656
+              },
+              "probability": 0.2
+          }]
       }
