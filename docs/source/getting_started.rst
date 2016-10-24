@@ -55,7 +55,7 @@ header and uses the Bearer schema, a request could look like this
 
 .. sourcecode:: http
 
-   POST /v1/project/econ-bankrec/model/heuristics HTTP/1.1
+   POST /v1/project/econ-bankrec/model/heuristics/predict HTTP/1.1
    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...
    Content-Type: application/json
    Content-Length: 517
@@ -84,13 +84,13 @@ the schema of the returned data is model dependent.
        "output": [
            {
                "label": {
-                   "account": 6750,
+                   "account": 6750
                },
                "probability": 0.2
            },
            {
                "label": {
-                   "account": 31656,
+                   "account": 31656
                },
                "probability": 0.2
            }
