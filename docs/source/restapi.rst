@@ -42,7 +42,7 @@ Getting Predictions
 
       HTTP/1.1 200 OK
       Vary: Accept
-      Content-Type: text/javascript
+      Content-Type: application/json
 
       {
           "output": [{
