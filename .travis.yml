@@ -1,0 +1,19 @@
+language: python
+python: 3.5
+sudo: false
+
+install:
+    - pip install sphinx sphinxcontrib-httpdomain sphinx_rtd_theme
+
+script:
+    - make clean html -C docs
+
+deploy:
+  provider: s3
+  access_key_id: "AKIAIJ2QFBIGEO7Y7AJQ"
+  secret_access_key: "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"
+  bucket: "autosuggest-docs"
+  skip_cleanup: true
+  region: "eu-west-1"
+  local_dir: "docs/build/html"
+
