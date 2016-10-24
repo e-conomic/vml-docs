@@ -1,7 +1,9 @@
 language: python
 python: 3.5
 sudo: false
-cache: pip
+cache:
+  apt: true
+  pip: true
 
 install:
     - pip install sphinx sphinxcontrib-httpdomain sphinx_rtd_theme
