@@ -17,5 +17,4 @@ Table of content
 
     getting_started
     restapi
-    architecture
 

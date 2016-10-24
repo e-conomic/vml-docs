@@ -6,14 +6,14 @@ REST Interface
 Getting Predictions
 -------------------
 
-.. http:post:: /v1/problem/:problem/model/:model
-   :synopsis: Send a new SMS
+.. http:post:: /v1/project/:project/model/:model
+   :synopsis: 
 
-   Get a prediction for :code:`:problem` using :code:`:model`. Authorization
+   Get a prediction for :code:`:project` using :code:`:model`. Authorization
    with JWT token is required. If a `dsl` claim is present in the content of
    the JWT token the `dsl` claim will be used to locate training data.
 
-   :reqjson array prediction_data: Array of elements to predict on.
+   :reqjson array input: Array of elements to predict on.
    :reqjson array training_data: Optinal, array of training data, if no `dsl`
       is required the field is required.
 
@@ -23,13 +23,13 @@ Getting Predictions
 
    .. sourcecode:: http
 
-      POST /v1/problem/example-problem/model/example-model HTTP/1.1
+      POST /v1/project/example-project/model/example-model HTTP/1.1
       Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC... 
       Content-Type: application/json
       Content-Length: 517
       
       {
-          "entries": [
+          "input": [
               {
                   "text": "Taxa receipt"
               },
@@ -48,7 +48,7 @@ Getting Predictions
       Content-Type: text/javascript
 
       {
-        "predictions": [
+        "output": [
           {
                "label": {
                    "account": 6750,

@@ -7,10 +7,10 @@ api<restapi-label>` that will be described in detail later in this document.
 
 A minimal example
 -----------------
-So we have a consumer(a Visma ERP) -- we'll use e-conomic in this example -- that wants to map text
-entries to general ledger accounts. They contacted our team about the problem
-and now our data science guys have developed and uploaded a model that maps
-text to general ledger accounts.
+So we have a consumer(a Visma ERP) -- we'll use e-conomic in this example --
+that wants to map text entries to general ledger accounts. They contacted
+our team about the problem and now our data science team have developed and
+uploaded a model that maps text to general ledger accounts.
 
 The consumer has received a set of master credentials
 
@@ -20,16 +20,17 @@ The consumer has received a set of master credentials
    secret:   N1YiI6ImFjY291bnRfMTIzIi
 
 which is used to issue `JWT tokens <https://jwt.io>`_ (authorization headers)
-to end users. JWT tokens allow e-conomic to share access to AutoSuggest with e.g.
-web clients directly without revealing the master credentials.
+to callers of the prediction api. JWT tokens allow e-conomic to share access
+to AutoSuggest with e.g. web clients directly without revealing the master
+credentials.
 
-When e-conomic issues an auth token to an end user they
-set the :code:`iss` claim, so Autosuggest can identify and verify
-the issuer. If the issuer is a known consumer of Autosuggest and the signature
-can be verified, custom claims (fields) in the content of the JWT token are used by
-Autosuggest, an example being :code:`dsl` that describes the location of a
-dataset. Below is an example in python genereting a JWT token with the
-given master credentials, this token will expire 01/01/2017.
+When e-conomic issues an auth token to an end user they set the :code:`iss`
+claim, so Autosuggest can identify and verify the issuer. If the issuer is
+a known consumer of Autosuggest and the signature can be verified, custom
+claims (fields) in the content of the JWT token are used by Autosuggest, an
+example being :code:`dsl` that describes the location of a training dataset.
+Below is an example in python genereting a JWT token with the given master
+credentials, this token will expire 01/01/2017.
 
 .. sourcecode:: python
 
@@ -54,13 +55,13 @@ header and uses the Bearer schema, a request could look like this
 
 .. sourcecode:: http
 
-   POST /v1/econ-example-problem HTTP/1.1
+   POST /v1/project/econ-bankrec/model/heuristics HTTP/1.1
    Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cC...
    Content-Type: application/json
    Content-Length: 517
 
    {
-       "prediction_data": [
+       "input": [
            {
                "text": "Taxa receipt"
            },
@@ -80,7 +81,7 @@ the schema of the returned data is model dependent.
    Content-Type: application/json
 
    {
-       "predictions": [
+       "output": [
            {
                "label": {
                    "account": 6750,
@@ -97,30 +98,30 @@ the schema of the returned data is model dependent.
    }
 
 We have seen a minimal example on how Autosuggest can be used, but in practice
-the amount of and location of training data introduces some problems. That we
-will discuss below.
+the location and size of training data introduces some problems. That we will
+discuss below.
 
 
 Locating training data
 ----------------------
 
-When predictions are requested, AutoSuggest needs training data to train the model.
-The training data can be part of the request or the JWT token can hold
+When predictions are requested, AutoSuggest needs training data to train the
+model. The training data can be part of the request or the JWT token can hold
 a URI for the dataset. Examples on DataSet Locations (dsl) are
 
 - :code:`http://user:pass@econ.com/asgtdata/123e4567-e89b-12d3-a456-42665544`
 - :code:`datalake://companies(1423413)/generalledgertransactions?$top=100`
-- :code:`autosuggest://account_2314`
+- :code:`autosuggest://econ-bankrec/account_2314`
 
-The schema defines how Autosuggest will locate and retrieve the dataset.
-We call the extensions that knowns how to handle a certain schema *data
-connectors*. AutoSuggest develops new data connectors as needed based on consumer
+The schema defines how Autosuggest will locate and retrieve the dataset, we
+call these schema connector plugins for *data connectors*.
+AutoSuggest develops new data connectors as needed based on consumer
 requirements.
 In general AutoSuggest does not perform ETL - but rely on clients to prepare
 data for training and prediction - but the system is flexible when it comes to
 retrieving the data sets.
-At present AutoSuggest is able to access data sets stored with us
-- or data sets made available through en endpoint in the Visma Datalake.
+At present AutoSuggest is able to access data sets stored with us - or data
+sets made available through en endpoint in the Visma Datalake.
 
 Storing data with Autosuggest
 -----------------------------
