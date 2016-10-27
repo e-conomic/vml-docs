@@ -120,9 +120,9 @@ Datasets
 .. http:delete:: /v1/project/:project/datastore/:key
    :synopsis: Delete dataset from autosuggest storage
 
-   :status 202: request succeeded
+   :status 202: Request succeeded
 
 .. http:get:: /v1/project/:project/datastore/:key
    :synopsis: Get meta data about the dataset, the dataset itself will not be returned
 
-   :status 200: request succeeded
+   :status 200: Request succeeded

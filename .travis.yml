@@ -4,18 +4,16 @@ sudo: false
 cache:
   apt: true
   pip: true
-
 install:
-    - pip install sphinx sphinxcontrib-httpdomain sphinx_rtd_theme
-
+- pip install sphinx sphinxcontrib-httpdomain sphinx_rtd_theme
 script:
-    - make clean html -C docs
-
+- make clean html -C docs
 deploy:
   provider: s3
-  access_key_id: "AKIAIJ2QFBIGEO7Y7AJQ"
-  secret_access_key: "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"
-  bucket: "autosuggest-docs"
+  access_key_id: AKIAIJ2QFBIGEO7Y7AJQ
+  secret_access_key:
+    secure: Zf91SZdrBDksFpCN5fRtk9Tj1fO8uPfeVitjX9FSw5aWCitagBqNix0JKRfx2amBkQagCJlaRiRVIEy0xKDZ8nxD45obRBUwpAjQzgixYc3TTh9jFHz4PifpSKnKlSeu8pY4ZX3fj75VQdd9aTUZvfaanuudr4ajG6nfgTMTSWMqzu9lXYvz1A8zVEF3DHT+xh5W8OJx1iT/Vov1pOzecTsxQVKp28wmYQO0/QGoHSL6Jsi+fwLNApH4yPmMePYSBCm+8Dbmm1bW7gjKn7aREW7dDql40Z2l+6wY+2M8iVWWJW8+lIlOolhlR4Ll8WUg3bxcPpuAFsAU8Wj9RxtgeFyHpINzM+gntssstQgLf7LmR8XgLXoyyyb6ffmdtd7f1gXugl+nAbHaP0q8eftGiPRufEnlcwsvdv1zuKImmZBkQNK2TvvoYNU4eZnHO6pLEiofORXnPWyDbAMJ/X01RKgdVMWK5AMFyDQ4GRvZO8O4YhnKtho5wwGgt/jbqEYeEiI+9WlfwVtrAvj05n8mfXlNTzCW/k5YIT6fj2VD0HIBQEP3woS22FnNeW4XXTtE4m91/wm8KHVFiAKTi4SGAl+22J74GY6l5qOGrr3pKX79sjTMbFO2xcCQvSQggxdsl9/a9VPv1fxDJihUAJC35EOCxxTic9Lh4fP9FaLanbU=
+  bucket: autosuggest-docs
   skip_cleanup: true
-  region: "eu-west-1"
-  local_dir: "docs/build/html"
+  region: eu-west-1
+  local_dir: docs/build/html
