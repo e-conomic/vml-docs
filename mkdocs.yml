@@ -1,0 +1,12 @@
+site_name: Visma Autosuggest
+pages:
+    - What is Autosuggest: index.md
+    - Getting started: two.md
+    - Models overview:
+      - Bank reconciliation: two.md
+      - Scanned invoice: two.md
+      - Elictronic invoice: two.md
+    - Notes on security: two.md
+theme:
+  name: 'material'
+  custom_dir: 'theme'
