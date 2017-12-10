@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    name: asgt-docs
+  spec:
+    replicas: 2
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 10%
+        maxSurge: 50%
+    template:
+      metadata:
+        labels:
+          app: asgt-docs
+      spec:
+        containers:
+          - name: asgt-docs
+            image: "quay.io/economic/vml-asgt-docs:latest"
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 8000
+            resources:
+              limits:
+                memory: 256M
+        imagePullSecrets:
+        - name: economic-vml-ro-pull-secret
+
+- apiVersion: v1
+  kind: Service
+  metadata:
+    name: asgt-docs
+  spec:
+    selector:
+      app: asgt-docs
+    ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 8000
+
+- apiVersion: extensions/v1beta1
+  kind: Ingress
+  metadata:
+    name: asgt-docs
+    annotations:
+      ingress.kubernetes.io/rewrite-target: /
+      ingress.kubernetes.io/configuration-snippet: |
+        rewrite ^(/docs)$ $1/ permanent;
+  spec:
+    rules:
+    - host: autosuggest.staging.ml.e-conomic.ws
+      http:
+        paths:
+        - path: /docs
+          backend:
+            serviceName: asgt-docs
+            servicePort: 80
+    - host: autosuggest.ml.e-conomic.ws
+      http:
+        paths:
+        - path: /docs
+          backend:
+            serviceName: asgt-docs
+            servicePort: 80
