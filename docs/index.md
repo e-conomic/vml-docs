@@ -1,19 +1,49 @@
-# What does it do?
+# Autosuggest <small>for intelligent ERP systems</small>
 
-Autosuggest is a set of APIs developed to provide automation in ERP systems.
+## Automate ERP workflows
+Autosuggest is a set of REST APIs developed to aid automation in ERP systems.
+Often customers of ERP systems are performing the same tasks many times a day,
+as an example every invoice have to be booked on some account from the chart of
+accounts.
 
+![asgt-explain](img/asgt-explained.png)
 
+In the next image we see how Visma e-conomic uses the Autosuggest to fill out
+accounts for a customer based on bank transfer statements.
 
-## Getting started
+![asgt-demo](img/asgt-demo.gif)
 
-* Contact Claus Dahl and ask for an api key
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+## A quick API example
 
-##  The models
+We have demo datasets for all our APIs, the only thing you need to get started
+is to contact [Claus Dahl](mailto:claus.dahl@visma.com) for an access key.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+!!! todo
+    Demo datasets are not yes available
+
+```json
+POST /model/scanned-invoice/v2/predict HTTP/1.1
+Authorization: Bearer secret-access-token
+
+{
+    "dataset": "user/3124232",
+    "input": [{"description": "Taxi til kundemøde"}],
+    "targets": ["account"]
+}
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "predictions": [{"account": [{"confidence": 0.19, "label": "3620"}]}]
+}
+```
+
+That is all for calling the api. But we made an assumption here!  We used the
+preuploaded dataset `user/3124232`. 
+
+Customers behaive differently when using your application and therefore we need
+a per user dataset to learn their specific behaiver. 
+We exchange user datasets using our secure s3 as shared storage facility. When
+we handle your data it is always encrypted at rest (with Hardware Security
+Modules) and in transfer (TLS) with state of the art encryption solutions.
