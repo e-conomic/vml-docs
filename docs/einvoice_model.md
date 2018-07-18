@@ -32,11 +32,17 @@ As json, this could look like:
 }
 ```
 
-When calling the service API, the schema looks like this:
+Note that all fields are required, but all are nullable with the exception of `supplier_id`. So while required, sending `null` values are allowed.
+
+Request and Response
+--------------------
+
+When calling the service API, payload would look like this:
 
 ```json
 POST /model/electronic-invoice-line/v1
 Authorization: Bearer secret-access-token
+
 {
     "inputs": {
         "issue_date": "YYYY-MM-DD'T'hh:mm:ss'Z'",
@@ -48,8 +54,39 @@ Authorization: Bearer secret-access-token
         "line_text": "icecream cone",
         "line_id": "0b678d5c-5d76-4e81-adc5-758963c52388"
     },
-    "targets": ["target0", "target6"]
+    "targets": ["target0", "target6"],
+    "options": {
+        "suggestion_limit": 1
+    }
 }
 ```
 
-Note that all fields are required, but all are nullable with the exception of `supplier_id`. So while required, sending `null` values are allowed.
+And the response would look like this.
+
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "predictions": [
+        {
+            "target0": [
+                {
+                    "confidence": 0.51,
+                    "label": "501090"
+                }
+            ],
+            "target6": [
+                {
+                    "confidence": 0.26,
+                    "label": "2050001112"
+                }
+            ]
+        }
+    ]
+}
+
+```
+
+Each prediction include the predicted value as well as the confidence the model provided as a float between 0 and 1, with 2 digits after the decimal point precision.
+Having the confidence included means that you can discard predictions under a certain confidence, but the precise cut-off point is likely to depend on the needs of the individual integration case.
