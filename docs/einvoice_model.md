@@ -46,17 +46,19 @@ POST /model/electronic-invoice-line/v1
 Authorization: Bearer secret-access-token
 
 {
-    "inputs": {
-        "issue_date": "2018-07-18T12:32:55Z",
-        "currency": "DKK",
-        "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
-        "supplier_name": "Jimmys Icecream Truck",
-        "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
-        "customer_ref": "2eb0e66d-8d93-405b-a90d-97ff70cb9006",
-        "total": 10,
-        "line_text": "icecream cone",
-        "line_id": "0b678d5c-5d76-4e81-adc5-758963c52388"
-    },
+    "inputs": [
+        {
+            "issue_date": "2018-07-18T12:32:55Z",
+            "currency": "DKK",
+            "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
+            "supplier_name": "Jimmys Icecream Truck",
+            "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
+            "customer_ref": "2eb0e66d-8d93-405b-a90d-97ff70cb9006",
+            "total": 10,
+            "line_text": "icecream cone",
+            "line_id": "0b678d5c-5d76-4e81-adc5-758963c52388"
+        }
+    ],
     "targets": ["target0", "target6"],
     "options": {
         "suggestion_limit": 1
