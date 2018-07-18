@@ -19,7 +19,7 @@ We have demo datasets for all our APIs, the only thing you need to get started
 is to contact [Claus Dahl](mailto:claus.dahl@visma.com) for an access key.
 
 !!! todo
-    Demo datasets are not yes available
+    Demo datasets are not yet available
 
 ```json
 POST /model/scanned-invoice/v2/predict HTTP/1.1
@@ -40,10 +40,10 @@ Content-Type: application/json
 ```
 
 That is all for calling the api. But we made an assumption here!  We used the
-preuploaded dataset `user/3124232`. 
+preuploaded dataset `user/3124232`.
 
-Customers behaive differently when using your application and therefore we need
-a per user dataset to learn their specific behaiver. 
+Customers behave differently when using your application and therefore we need
+a per user dataset to learn their specific behaviour.
 We exchange user datasets using our secure s3 as shared storage facility. When
 we handle your data it is always encrypted at rest (with Hardware Security
 Modules) and in transfer (TLS) with state of the art encryption solutions.
