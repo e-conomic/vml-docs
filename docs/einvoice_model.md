@@ -22,13 +22,13 @@ As json, this could look like:
 ```json
 {
     "issue_date": "YYYY-MM-DD'T'hh:mm:ss'Z'",
-    "currency": "",
-    "supplier_id": "",
-    "supplier_global_id": "",
-    "customer_ref": "",
+    "currency": "DKK",
+    "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
+    "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
+    "customer_ref": "2eb0e66d-8d93-405b-a90d-97ff70cb9006",
     "total": 10,
-    "line_text": "",
-    "line_id": "",
+    "line_text": "icecream cone",
+    "line_id": "0b678d5c-5d76-4e81-adc5-758963c52388"
 }
 ```
 
@@ -40,13 +40,13 @@ Authorization: Bearer secret-access-token
 {
     "inputs": {
         "issue_date": "YYYY-MM-DD'T'hh:mm:ss'Z'",
-        "currency": "",
-        "supplier_id": "",
-        "supplier_global_id": "",
-        "customer_ref": "",
+        "currency": "DKK",
+        "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
+        "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
+        "customer_ref": "2eb0e66d-8d93-405b-a90d-97ff70cb9006",
         "total": 10,
-        "line_text": "",
-        "line_id": "",
+        "line_text": "icecream cone",
+        "line_id": "0b678d5c-5d76-4e81-adc5-758963c52388"
     },
     "targets": ["target0", "target6"]
 }
