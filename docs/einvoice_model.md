@@ -8,7 +8,7 @@ Schema
 
 The base schema of the Electronic Invoice Line is the following fields:
 
-- `issue_date`: The invoice timestamp
+- `issue_date`: The invoice timestamp, using the format `YYYY-MM-DD'T'hh:mm:ss'Z'`
 - `currency`: The name of the currency as a string
 - `supplier_id`: The id of the supplier
 - `supplier_global_id`: The global id of the supplier
