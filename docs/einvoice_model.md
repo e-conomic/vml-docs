@@ -21,7 +21,7 @@ As json, this could look like:
 
 ```json
 {
-    "issue_date": "YYYY-MM-DD'T'hh:mm:ss'Z'",
+    "issue_date": "2018-07-18T12:32:55Z",
     "currency": "DKK",
     "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
     "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
@@ -45,7 +45,7 @@ Authorization: Bearer secret-access-token
 
 {
     "inputs": {
-        "issue_date": "YYYY-MM-DD'T'hh:mm:ss'Z'",
+        "issue_date": "2018-07-18T12:32:55Z",
         "currency": "DKK",
         "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
         "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
