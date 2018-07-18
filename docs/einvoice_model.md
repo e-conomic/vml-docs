@@ -11,6 +11,7 @@ The base schema of the Electronic Invoice Line is the following fields:
 - `issue_date`: The invoice timestamp, using the format `YYYY-MM-DD'T'hh:mm:ss'Z'`
 - `currency`: The name of the currency as a string
 - `supplier_id`: The id of the supplier, not nullable
+- 'supplier_name': The name of the supplier
 - `supplier_global_id`: The global id of the supplier
 - `customer_ref`: The reference of the customer
 - `total`: The total of the invoice
@@ -24,6 +25,7 @@ As json, this could look like:
     "issue_date": "2018-07-18T12:32:55Z",
     "currency": "DKK",
     "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
+    "supplier_name": "Jimmys Icecream Truck",
     "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
     "customer_ref": "2eb0e66d-8d93-405b-a90d-97ff70cb9006",
     "total": 10,
@@ -48,6 +50,7 @@ Authorization: Bearer secret-access-token
         "issue_date": "2018-07-18T12:32:55Z",
         "currency": "DKK",
         "supplier_id": "9a3f13db-12f8-4d89-ba94-c34d89906324",
+        "supplier_name": "Jimmys Icecream Truck",
         "supplier_global_id": "265193dd-627b-4896-aee4-82f376da6a84",
         "customer_ref": "2eb0e66d-8d93-405b-a90d-97ff70cb9006",
         "total": 10,
