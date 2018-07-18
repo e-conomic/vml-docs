@@ -52,3 +52,4 @@ Authorization: Bearer secret-access-token
 }
 ```
 
+Note that all fields are required, but all are nullable with the exception of `supplier_id`. So while required, sending `null` values are allowed.
