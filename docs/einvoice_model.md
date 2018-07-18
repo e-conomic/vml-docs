@@ -14,7 +14,7 @@ The base schema of the Electronic Invoice Line is the following fields:
 - 'supplier_name': The name of the supplier
 - `supplier_global_id`: The global id of the supplier
 - `customer_ref`: The reference of the customer
-- `total`: The total of the invoice
+- `total`: The total of the invoice, either a `float` or an `integer`
 - `line_text`: The text of the invoice line
 - `line_id`: The id of the line
 
