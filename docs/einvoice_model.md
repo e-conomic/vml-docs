@@ -11,7 +11,7 @@ The base schema of the Electronic Invoice Line is the following fields:
 - `issue_date`: The invoice timestamp, using the format `YYYY-MM-DD'T'hh:mm:ss'Z'`
 - `currency`: The name of the currency as a string
 - `supplier_id`: The id of the supplier, not nullable
-- 'supplier_name': The name of the supplier
+- `supplier_name`: The name of the supplier
 - `supplier_global_id`: The global id of the supplier
 - `customer_ref`: The reference of the customer
 - `total`: The total of the invoice, either a `float` or an `integer`
