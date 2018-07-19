@@ -36,6 +36,11 @@ As json, this could look like:
 
 Note that all fields are required, but all are nullable with the exception of `supplier_id`. So while required, sending `null` values are allowed.
 
+As Training Data
+----------------
+
+A dataset consists of multiple invoice lines all packed up into one protobuf file. The protobuf contains a top level item called `Dataset` and under that is a sequence of items called `invoicelines`, where all the invoice lines that make up a dataset goes.
+
 Request and Response
 --------------------
 
