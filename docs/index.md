@@ -17,6 +17,8 @@ We have demo datasets for all our APIs, the only thing you need to get started i
 !!! todo
     Demo datasets are not yet available
 
+Assuming we have previously uploaded a dataset called `user/3124232`, we could call the API like this:
+
 ```json
 POST /model/scanned-invoice/v2/predict HTTP/1.1
 Authorization: Bearer secret-access-token
@@ -34,8 +36,6 @@ Content-Type: application/json
     "predictions": [{"account": [{"confidence": 0.19, "label": "3620"}]}]
 }
 ```
-
-That is all for calling the api, but we made an assumption here! We used the preuploaded dataset `user/3124232`.
 
 Customers often behave differently, needing different predictions to the same input. Therefore it is generally recommended to build a dataset per costumer in order to have the algorithms learn the correct behaviour of each customer.
 We exchange user datasets using our secure S3 as shared storage facility. When we handle your data it is always encrypted at rest (with Hardware Security Modules) and in transfer (TLS) with state of the art encryption solutions.
