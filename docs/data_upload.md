@@ -9,6 +9,7 @@ Lets for the sake of an example say we are a small business accounting company c
 When building the dataset, it needs to be build in accordance with the format used by the model used by the Electronic-Invoice-Line service. We name the dataset something we can remember from the customer we want to predict on such as `jimmys-icecream-truck` (although an id of sorts would suffice as well). Since it is a protobuf it is required (and generally considered good style) to append `.pb` to the name of the dataset, making it `jimmys-icecream-truck.pb`.
 
 With the dataset in hand, we can now upload it. Say we want to upload it to prodcution we would need to upload to the S3 bucket called `asgt.dataset.production` with the path `bru/electronic-invoice-line/jimmys-icecream-truck.pb`, with `bru` being the name of our company.
+We use AWS access credentials provided by the VML product team - the developers behind the Autosuggest service.
 
 Once we have uploaded the data the Autosuggest systems take over, training the model for the service with the dataset, producing as many targets as the datasets defines.
 
