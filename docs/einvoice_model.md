@@ -99,6 +99,6 @@ Content-Type: application/json
 ```
 
 Each prediction include the predicted value as well as the confidence the model provided as a float between 0 and 1, rounded to 2 significant decimal places.
-Having the confidence included means that you can discard predictions under a certain confidence, but the precise cut-off point is likely to depend on the needs of the individual integration case.
+Having the confidence included means that you can discard predictions under a certain confidence, but the precise cut-off point is likely to depend on the needs of the individual integration case - in principle it could be used in the UI to indicate how much care and attention the enduser should give to ensure the data is correct.
 
 The response may also include other headers, but those should not be seen as a part of the API and may change over time.
