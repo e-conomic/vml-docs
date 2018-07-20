@@ -5,6 +5,7 @@ Autosuggest is a set of web APIs developed to aid automation in ERP systems.
 Often customers of ERP systems are performing the same tasks many times a day,
 as an example every invoice have to be booked on some account from the chart of
 accounts.
+Autosuggest aims to ease these manual tasks, by providing APIs that can give suggestions to the users, so some of that work can be reduced to simply approving what the machine learning predicted.
 
 ![asgt-explain](img/asgt-explained.png)
 
