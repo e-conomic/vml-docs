@@ -25,7 +25,7 @@ Authorization: Bearer secret-access-token
 
 {
     "dataset": "user/3124232",
-    "input": [{"description": "Taxi til kundemøde"}],
+    "input": [{"description": "Taxi to customer meeting"}],
     "targets": ["account"]
 }
 
