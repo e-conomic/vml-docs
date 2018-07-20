@@ -40,7 +40,7 @@ Content-Type: application/json
 }
 ```
 
-That is all for calling the api. But we made an assumption here!  We used the
+That is all for calling the api, but we made an assumption here! We used the
 preuploaded dataset `user/3124232`.
 
 Customers behave differently when using your application and therefore we need
