@@ -1,6 +1,6 @@
 # Autosuggest <small>for intelligent ERP systems</small>
 
-## Automate ERP workflows
+## Automate ERP Workflows
 Autosuggest is a set of web APIs developed to aid automation in ERP systems. Often customers of ERP systems are performing the same tasks many times a day, as an example every invoice have to be booked on some account from the chart of accounts.
 Autosuggest aims to ease these manual tasks, by providing APIs that can give suggestions to the users, so some of that work can be reduced to simply approving what the machine learning predicted.
 
@@ -10,7 +10,7 @@ In the next image we see how Visma e-conomic uses the Autosuggest to fill out ac
 
 ![asgt-demo](img/asgt-demo.gif)
 
-## A quick API example
+## Quick API Example
 
 We have demo datasets for all our APIs, the only thing you need to get started is to contact [Claus Dahl](mailto:claus.dahl@visma.com) for an access key.
 
