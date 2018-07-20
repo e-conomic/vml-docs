@@ -45,6 +45,6 @@ preuploaded dataset `user/3124232`.
 
 Customers behave differently when using your application and therefore we need
 a per user dataset to learn their specific behaviour.
-We exchange user datasets using our secure s3 as shared storage facility. When
+We exchange user datasets using our secure S3 as shared storage facility. When
 we handle your data it is always encrypted at rest (with Hardware Security
 Modules) and in transfer (TLS) with state of the art encryption solutions.
