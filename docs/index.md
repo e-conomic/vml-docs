@@ -1,7 +1,7 @@
 # Autosuggest <small>for intelligent ERP systems</small>
 
 ## Automate ERP workflows
-Autosuggest is a set of REST APIs developed to aid automation in ERP systems.
+Autosuggest is a set of web APIs developed to aid automation in ERP systems.
 Often customers of ERP systems are performing the same tasks many times a day,
 as an example every invoice have to be booked on some account from the chart of
 accounts.
