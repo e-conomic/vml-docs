@@ -1,7 +1,7 @@
 Electronic Invoice Line Model
 =============================
 
-<What it does...>
+Othsewise known as EIL, it can make predictions on how to categorize a new invoice line, in a HTTP request, given historic categorizations, given from the training data in the dataset.
 
 Schema
 ------
