@@ -102,3 +102,8 @@ Each prediction include the predicted value as well as the confidence the model 
 Having the confidence included means that you can discard predictions under a certain confidence, but the precise cut-off point is likely to depend on the needs of the individual integration case - in principle it could be used in the UI to indicate how much care and attention the enduser should give to ensure the data is correct.
 
 The response may also include other headers, but those should not be seen as a part of the API and may change over time.
+
+Caveats
+-------
+
+- **Too few classes**: Some times the dataset only provide one classification for a certain value, as a fail-safe the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
