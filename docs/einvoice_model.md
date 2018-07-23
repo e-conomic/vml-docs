@@ -111,3 +111,4 @@ Caveats & Troubleshooting
 - **Bad Request Responses**: If you make a request to the API and get a 400 Bad Request, you are always returned a snippet of JSON, that contains information on what was wrong with the request.
 
 - **Not Found Responses**: As a model trains and targets are saved, they gradually become available via the API. As a result you might not see the trained targets available right away, but it should be reasonably safe to just repeat calling the prediction endpoint until the model becomes available - although the usual backoff is recommended.
+Furthermore, even a single unavailable target will currently abort the request, therefore it is geneally advised to call targets individually, so one missing target will not distrubt predictions on other targets.
