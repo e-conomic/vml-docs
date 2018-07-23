@@ -108,4 +108,6 @@ Caveats & Troubleshooting
 
 - **Too few classes**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
 
-- **Bad Requests**: If you make a request to the API and get a 400 Bad Request, you are always returned a snippet of JSON, that contains information on what was wrong with the request.
+- **Bad Request Responses**: If you make a request to the API and get a 400 Bad Request, you are always returned a snippet of JSON, that contains information on what was wrong with the request.
+
+- **Not Found Responses**: As a model trains and targets are saved, they gradually become available via the API. As a result you might not see the trained targets available right away, but it should be reasonably safe to just repeat calling the `/predict` endpoint until the model becomes available - although the usual backoff is recommended.
