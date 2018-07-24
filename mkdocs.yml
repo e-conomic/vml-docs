@@ -1,7 +1,7 @@
 site_name: Autosuggest Docs
 pages:
     - What is Autosuggest: index.md
-    - Uploading training data: data_upload.md
+    - Uploading Training Data: data_upload.md
     - The e-invoice model: einvoice_model.md
 theme:
   name: 'material'
