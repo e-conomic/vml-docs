@@ -106,7 +106,7 @@ The response may also include other headers, but those should not be seen as a p
 Caveats & Troubleshooting
 -------------------------
 
-- **Too few classes**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
+- **Zero confidence prediction**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
 
 - **Bad Request Responses**: If you make a request to the API and get a 400 Bad Request, you are always returned a snippet of JSON, that contains information on what was wrong with the request.
 
