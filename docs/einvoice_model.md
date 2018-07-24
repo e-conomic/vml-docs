@@ -41,6 +41,9 @@ As Training Data
 
 A dataset consists of multiple invoice lines all packed up into one protobuf file. The protobuf contains a top level item called `Dataset` and under that is a sequence of items called `invoicelines`, where all the invoice lines that make up a dataset goes.
 
+!!! Todo
+    Include a link to the protobuf definition, that is easier to get to than the file in the github repo.
+
 Request and Response
 --------------------
 
