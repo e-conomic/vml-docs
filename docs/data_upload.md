@@ -23,14 +23,14 @@ Training time depends on the size of the dataset, specifically the number of cla
 Uploading Examples
 ------------------
 
-There is various ways you can upload datasets to S3 buckets, most languages have SDKs for AWS services - or at very least to S3.
+There is various ways you can upload datasets to S3 buckets, most languages have SDKs for AWS services - or at very least to S3. Here is some small examples of how you could upload datasets to the Autosuggest systems, although this is not an exhaustive list.
 
 ### Shell
 
 Amazon has a [CLI](https://aws.amazon.com/cli/) for interacting with a many of their services via the shell, to use it to upload the a dataset you could use a command like this:
 
 ```shell
-$ aws s3 cp <dataset_file> s3://asgt.dataset.<env>/<username>/<service_name>/
+$ aws s3 cp jimmys-icecream-truck.pb s3://asgt.dataset.production/bru/electronic-invoice-line/
 ```
 
 You might not want to use the shell approach in production, but for getting started and uploading _some_ data to be able to see how the predictions work, manually uploading via the CLI is quite alright.
@@ -44,10 +44,10 @@ import boto3
 
 s3 = boto3.client('s3')
 
-dataset_filename = 'my-dataset.pb'
+dataset_path = 'bru/electronic-invoice-line/jimmys-icecream-truck.pb'
 bucket_name = 'asgt.dataset.production'
 
-s3.upload_file(dataset_filename, bucket_name, dataset_filename)
+s3.upload_file(dataset_path, bucket_name, dataset_path)
 ```
 
 This example assumes that the dataset has been written to disk beforehand, but it is also possible to skip that step and upload directly from a dataset in memory.
