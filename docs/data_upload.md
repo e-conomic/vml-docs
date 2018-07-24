@@ -19,3 +19,35 @@ We use AWS access credentials provided by the VML product team - the developers 
 Once we have uploaded the data the Autosuggest systems take over, training the model for the service with the dataset, producing as many targets as the datasets defines.
 
 Training time depends on the size of the dataset, specifically the number of classes and the number of targets in the dataset. So if your dataset contains many classes and many targets, expect that training time can take a while.
+
+Actually Uploading Datasets
+---------------------------
+
+There is various ways you can upload datasets to S3 buckets, most languages have SDKs for AWS services - or at very least to S3.
+
+### Shell
+
+Amazon has a [CLI](https://aws.amazon.com/cli/) for interacting with a many of their services via the shell, to use it to upload the a dataset you could use a command like this:
+
+```shell
+$ aws s3 cp <dataset_file> s3://asgt.dataset.<env>/<username>/<service_name>/
+```
+
+You might not want to use the shell approach in production, but for getting started and uploading _some_ data to be able to see how the predictions work, manually uploading via the CLI is quite alright.
+
+### Python
+
+AWS provide the `boto3` SDK for Python, and it has several ways of working with it, this is just one example, adapted from the [boto3 docs](https://boto3.readthedocs.io/en/latest/guide/s3-example-creating-buckets.html#upload-a-file-to-an-amazon-s3-bucket):
+
+```python
+import boto3
+
+s3 = boto3.client('s3')
+
+dataset_filename = 'my-dataset.pb'
+bucket_name = 'asgt.dataset.production'
+
+s3.upload_file(dataset_filename, bucket_name, dataset_filename)
+```
+
+This example assumes that the dataset has been written to disk beforehand, but it is also possible to skip that step and upload directly from a dataset in memory.
