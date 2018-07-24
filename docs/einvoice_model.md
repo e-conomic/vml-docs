@@ -95,7 +95,6 @@ Content-Type: application/json
         }
     ]
 }
-
 ```
 
 Each prediction include the predicted value as well as the confidence the model provided as a float between 0 and 1, rounded to 2 significant decimal places.
@@ -106,7 +105,7 @@ The response may also include other headers, but those should not be seen as a p
 Caveats & Troubleshooting
 -------------------------
 
-- **Zero confidence prediction**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
+- **Zero Confidence Predictions**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
 
 - **Bad Request Responses**: If you make a request to the API and get a 400 Bad Request, you are always returned a snippet of JSON, that contains information on what was wrong with the request.
 
