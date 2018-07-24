@@ -37,7 +37,7 @@ You might not want to use the shell approach in production, but for getting star
 
 ### Python
 
-AWS provide the `boto3` SDK for Python, and it has several ways of working with it, this is just one example, adapted from the [boto3 docs](https://boto3.readthedocs.io/en/latest/guide/s3-example-creating-buckets.html#upload-a-file-to-an-amazon-s3-bucket):
+AWS provide the [boto3](https://pypi.org/project/boto3/) SDK for Python, and it has several ways of working with it, this is just one example, adapted from the [boto3 docs](https://boto3.readthedocs.io/en/latest/guide/s3-example-creating-buckets.html#upload-a-file-to-an-amazon-s3-bucket):
 
 ```python
 import boto3
