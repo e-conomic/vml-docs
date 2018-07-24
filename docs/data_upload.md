@@ -20,8 +20,8 @@ Once we have uploaded the data the Autosuggest systems take over, training the m
 
 Training time depends on the size of the dataset, specifically the number of classes and the number of targets in the dataset. So if your dataset contains many classes and many targets, expect that training time can take a while.
 
-Actually Uploading Datasets
----------------------------
+Uploading Examples
+------------------
 
 There is various ways you can upload datasets to S3 buckets, most languages have SDKs for AWS services - or at very least to S3.
 
