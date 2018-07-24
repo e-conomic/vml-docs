@@ -8,11 +8,15 @@ Viewing locally
 
 To view the documentation locally, install the needed dependencies (preferably in a virtualenv of sorts) like so:
 
-`$ pip install -r requirements.txt`
+```shell
+$ pip install -r requirements.txt
+```
 
 Then you can serve the docs locally using `mkdocs` using:
 
-`$ mkdocs serve`
+```shell
+$ mkdocs serve
+```
 
 Contributing
 ------------
