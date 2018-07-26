@@ -4,6 +4,8 @@ pages:
     - Uploading Training Data: data-upload.md
     - Models:
       - Electronic Invoice Line: models/einvoice-model.md
+      - Bank: models/bank.md
+      - Scanned Invoice: models/scanned-invoice.md
 theme:
   name: 'material'
   custom_dir: 'theme'
