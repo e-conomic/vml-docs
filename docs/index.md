@@ -14,7 +14,7 @@ In the next image we see how Visma e-conomic uses the Autosuggest to fill out ac
 
 We have demo datasets for all our APIs, the only thing you need to get started is to contact [Claus Dahl](mailto:claus.dahl@visma.com) for an access key.
 
-!!! todo
+!!! warning
     Demo datasets are not yet available
 
 Assuming we have previously uploaded a dataset called `user/3124232`, we could call the API like this:

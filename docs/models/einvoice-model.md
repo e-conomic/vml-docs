@@ -3,7 +3,7 @@ Electronic Invoice Line Model
 
 Othsewise known as EIL, it can make predictions on how to categorize a new invoice line, in a HTTP request, given historic categorizations, given from the training data in the dataset.
 
-!!! Todo
+!!! warning
     Improve the description of what the EIL actually does, explain model and targets.
 
 Schema
@@ -44,7 +44,7 @@ As Training Data
 
 A dataset consists of multiple invoice lines all packed up into one protobuf file. The protobuf contains a top level item called `Dataset` and under that is a sequence of items called `invoicelines`, where all the invoice lines that make up a dataset goes.
 
-!!! Todo
+!!! warning
     Include a link to the protobuf definition, that is easier to get to than the file in the github repo.
 
 Request and Response

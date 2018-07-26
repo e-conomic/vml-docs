@@ -8,7 +8,7 @@ Lets for the sake of an example say we are a small business accounting company c
 
 When building the dataset, it needs to be build in accordance with the format used by the model used by the Electronic-Invoice-Line service. We name the dataset something we can remember relates to the customer we want to predict on such as `jimmys-icecream-truck` (although an id of sorts would suffice as well). Since it is a protobuf it is required by our systems to append `.pb` to the name of the dataset, making it `jimmys-icecream-truck.pb`.
 
-!!! Note
+!!! tip
     When training, a number of transformations happen on the data, notably the dataset gets transformed into so-called `dataframes`, where the names of the colums are derived from the names on the fields of the data. In the case the first item in the protobuf is empty, the column names gets transformed incorrectly, and as a result the dataset does not contain any targets.
 
     So make sure the datasets do not contain empty lines.
