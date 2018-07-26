@@ -1,5 +1,5 @@
 Scanned Invoice
 ===============
 
-!!! Todo
+!!! warning
     These docs are currently incomplete
