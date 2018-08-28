@@ -65,3 +65,4 @@ items:
           backend:
             serviceName: asgt-docs
             servicePort: 80
+
