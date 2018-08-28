@@ -4,7 +4,7 @@ items:
 - apiVersion: extensions/v1beta1
   kind: Deployment
   metadata:
-    name: asgt-docs
+    name: vml-docs
   spec:
     replicas: 2
     strategy:
@@ -15,14 +15,14 @@ items:
     template:
       metadata:
         labels:
-          app: asgt-docs
+          app: vml-docs
       spec:
         containers:
-          - name: asgt-docs
-            image: "quay.io/economic/vml-asgt-docs:latest"
+          - name: vml-docs
+            image: "quay.io/economic/vml-docs:latest"
             imagePullPolicy: Always
             ports:
-            - containerPort: 8000
+            - containerPort: 80
             resources:
               limits:
                 memory: 256M
@@ -32,37 +32,28 @@ items:
 - apiVersion: v1
   kind: Service
   metadata:
-    name: asgt-docs
+    name: vml-docs
   spec:
     selector:
-      app: asgt-docs
+      app: vml-docs
     ports:
       - protocol: TCP
         port: 80
-        targetPort: 8000
+        targetPort: 80
 
 - apiVersion: extensions/v1beta1
   kind: Ingress
   metadata:
-    name: asgt-docs
+    name: vml-docs
     annotations:
       ingress.kubernetes.io/rewrite-target: /
       ingress.kubernetes.io/configuration-snippet: |
         rewrite ^(/docs)$ $1/ permanent;
   spec:
     rules:
-    - host: autosuggest.staging.ml.e-conomic.ws
+    - host: docs.ml.e-conomic.ws
       http:
         paths:
-        - path: /docs
-          backend:
-            serviceName: asgt-docs
+        - backend:
+            serviceName: vml-docs
             servicePort: 80
-    - host: autosuggest.ml.e-conomic.ws
-      http:
-        paths:
-        - path: /docs
-          backend:
-            serviceName: asgt-docs
-            servicePort: 80
-

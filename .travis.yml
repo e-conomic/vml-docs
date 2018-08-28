@@ -17,12 +17,13 @@ install:
 - pip install -r requirements.txt
 script:
 - mkdocs build
+before_deploy:
+- echo $QUAY_PASSWORD | docker login -u $QUAY_USERNAME --password-stdin quay.io
+- docker build -t economic/vml-docs .
+- docker tag economic/vml-docs quay.io/economic/vml-docs:latest
 deploy:
   - provider: script
-    script: echo $QUAY_PASSWORD | docker login -u $QUAY_USERNAME --password-stdin quay.io &&
-            docker build -t economic/vml-docs . &&
-            docker tag economic/vml-docs quay.io/economic/vml-docs:latest &&
-            docker push quay.io/economic/vml-docs:latest
+    script: docker push quay.io/economic/vml-docs:latest
     on:
       branch: master
 notifications:
