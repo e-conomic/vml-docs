@@ -1,5 +1,5 @@
 site_name: Autosuggest Docs
-pages:
+nav:
     - What is Autosuggest: index.md
     - Uploading Training Data: data-upload.md
     - Models:

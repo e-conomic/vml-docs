@@ -1,0 +1,28 @@
+sudo: required
+services:
+  - docker
+language: python
+python:
+- 3.6
+cache:
+  apt: true
+  pip: true
+env:
+  global:
+    - "QUAY_USERNAME=economic+vml_rw"
+before_install:
+- pip install --upgrade pip setuptools
+install:
+- pip install -r requirements.txt
+script:
+- mkdocs build
+deploy:
+  - provider: script
+    script: echo $QUAY_PASSWORD | docker login -u $QUAY_USERNAME --password-stdin quay.io &&
+            docker build -t economic/vml-docs . &&
+            docker tag economic/vml-docs quay.io/economic/vml-docs:latest &&
+            docker push quay.io/economic/vml-docs:latest
+    on:
+      branch: master
+notifications:
+  email: false
