@@ -10,6 +10,7 @@ cache:
 env:
   global:
     - "QUAY_USERNAME=economic+vml_rw"
+    - secure: "WDFFUIBHA6pSO7H+G/4UrL2qIzmIYmIjGrWPytCLdpovIeXlsmWEgrOZ1FaS0QPiWefaryxhWwj+ghrCpzA2dBanE7fEC0nYMRGr6N/0D0qe65CXrrmHodIz3GlFHKUdsfQ+dgPjMlLNYjRMm3hhylL33lQM5S1/14M/NKgR6GotbSeZtqfXTBP7ljbIGkIocpaU3MZ6PCH9I/o49sZruWdP8J/StR5ION3LQqdNaF2/4jMFgS+sGJApnz214gACkujoDUhib/yv+N1a691LxR6l81GIsyUdsDDFHhT+bFNeIkvnE+1IIy7i4yN0wxfqBze2cX5GvGQEzHxz+lhjGLmfuIKJ/1axEkO8k02Eqet5HesRIsIWJu/ab6oGrkbBjoNe45jciYZQ7rBAOyrzHS5B9jwRxgAT69GF1nwN6BU3wWyFiOVGZC9gks2pNPXziMJCclNY/GjNdwhu5lSBPaaWjiW04o+fdxn2L4+AgOPtiHjdkfeQs7GYSKcTZa3freqkO/IxnIWeaRhqhEEO1mSFP66/+owS+sNEnJrjfaXc73kWE2uwQgWSnJTO61UXe83/Y9ZIETuneewEbwynNlj1rrQ9odS1XkRNlGCCvf0kc8hFBxr98+YOuiUH2qFeFWK/Qxg6xHZDaa3CJAHEtceIUdXIzRx/ZO2noMNNF7o="
 before_install:
 - pip install --upgrade pip setuptools
 install:
