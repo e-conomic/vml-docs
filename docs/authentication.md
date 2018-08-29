@@ -3,8 +3,14 @@ Authentication
 
 All Autosuggest endpoints require authentication in the form of a bearer header on each request.
 
-Say the key you have received is `348af00db8de0db6fff26b6d2c70a862`, you should include a header with it in your request, here is a simple example in Python
+Say the key you have received is `348af00db8de0db6fff26b6d2c70a862`, you should include a header with it in your request, here is a few snippets demonstrating how you could acheive setting the header correctly.
 
+**Shell**
+```shell
+$ curl --header "Authorization: Bearer 348af00db8de0db6fff26b6d2c70a862" ...
+```
+
+**Python**
 ```python
 import requests
 
