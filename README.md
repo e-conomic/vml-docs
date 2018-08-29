@@ -1,7 +1,7 @@
 Autosuggest Docs
 ================
 
-The docs are located at [autosuggest.staging.ml.e-conomic.ws/docs](https://autosuggest.staging.ml.e-conomic.ws/docs).
+The docs are located at [http://docs.ml.e-conomic.ws/models/bank/](http://docs.ml.e-conomic.ws/models/bank/).
 
 Viewing locally
 ---------------
