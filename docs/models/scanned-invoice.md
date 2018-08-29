@@ -1,20 +1,41 @@
 Scanned Invoice
 ===============
 
-The Scanned Invoice model predicts and makes suggestions on
+The Scanned Invoice model predicts and makes suggestions on, the API is located at [https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict](https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict)
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
 
-Unlike other train-on-call APIs the Scanned Invoice API does not accept the actual training data in the request, but instead expects a name in the request payload, this name should then be available as a protobuf blob on S3 in a bucket called `vml-autosuggest-production` under the path `incoming/smartscan/` followed by the dataset name submitted in the payload.
+Unlike other train-on-call APIs the Scanned Invoice API does not accept the actual training data in the request, but instead expects a name in the request payload, this name should then be available as a protobuf blob on S3 in a bucket called `vml-autosuggest-production` under the path `incoming/smartscan/` followed by the dataset name submitted in the payload. The recommended format for that name is the name of the integrating service, followed by a slash, and lastly the name of the dataset, such as `smartscan/10023`.
 
 !!! warning
     These docs are currently incomplete
 
+Schema
+------
+
+The service has two schemas, one for the API and one for the protobuf dataset uploaded to S3.
+
+API
+===
+
+- `text` a list of strings.
+
+Dataset
+=======
+
+A list of items, used to train on
+
+- `text`, list of strings
+- `timestamp`, a datetime in the format `YYYY-MM-DDThh:mm:ssZ`
+- `targets`, a map of strings and strings
+
+Request and Response
+--------------------
 
 Example request:
 
 ```json
-POST
+POST /model/scanned-invoice/v1/predict
 Authorization: Bearer <secret-access-token>
 
 {
