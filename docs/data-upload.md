@@ -27,7 +27,7 @@ There is various ways you can upload datasets to S3 buckets, most languages have
 
 ### Shell
 
-Amazon has a [CLI](https://aws.amazon.com/cli/) for interacting with a many of their services via the shell, to use it to upload the a dataset you could use a command like this:
+Amazon has a [CLI tool](https://aws.amazon.com/cli/) for interacting with a many of their services via the shell, to use it to upload the a dataset you could use a command like this:
 
 ```shell
 $ aws s3 cp jimmys-icecream-truck.pb s3://asgt.dataset.production/bru/electronic-invoice-line/
