@@ -6,6 +6,8 @@ The supplier name model uses pretrained models of known suppliers to suggest how
 Location
 --------
 
+The supplier name endpoint is located at: [https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict](https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict).
+
 Schema
 ------
 
