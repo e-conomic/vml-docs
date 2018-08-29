@@ -28,6 +28,9 @@ resp = requests.post(
 In case the API is unable to authenticate your request, you will receive a response with the status code `401` and a payload like this:
 
 ```json
+HTTP/1.1 401 UNAUTHORIZED
+Content-Type: application/json
+
 {
     "name": "Unauthorized",
     "status_code": 401,
