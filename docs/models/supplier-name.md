@@ -11,6 +11,8 @@ The supplier name endpoint is located at: [https://autosuggest.ml.e-conomic.ws/m
 Schema
 ------
 
+On request, just supplier names are required. They are given as a list of mappings with the key `supplier_name`.
+
 Request and Response
 --------------------
 
