@@ -25,7 +25,7 @@ spec:
           limits:
             memory: 256M
         env:
-        - name: SPINNAKER_DEPLOY_TIME
+        - name: DEPLOY_TIME
           value: "\"${ execution['startTime'] }\""
       imagePullSecrets:
       - name: economic-vml-ro-pull-secret
