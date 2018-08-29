@@ -16,14 +16,17 @@ spec:
         app: vml-docs
     spec:
       containers:
-        - name: vml-docs
-          image: "quay.io/economic/vml-docs"
-          imagePullPolicy: Always
-          ports:
-          - containerPort: 80
-          resources:
-            limits:
-              memory: 256M
+      - name: vml-docs
+        image: "quay.io/economic/vml-docs"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 256M
+        env:
+        - name: SPINNAKER_DEPLOY_TIME
+          value: ${ execution['startTime'] }
       imagePullSecrets:
       - name: economic-vml-ro-pull-secret
 
