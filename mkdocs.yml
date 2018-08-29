@@ -1,6 +1,7 @@
 site_name: Autosuggest Docs
 nav:
     - What is Autosuggest: index.md
+    - Authentication: authentication.md
     - Uploading Training Data: data-upload.md
     - Models:
       - Electronic Invoice Line: models/einvoice-model.md
