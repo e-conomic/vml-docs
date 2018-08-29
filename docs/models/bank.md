@@ -8,7 +8,7 @@ The API and the model it uses is made to make bank reconciliation easier by prov
 Location
 --------
 
-The API is located at https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict.
+The prediction endpoint is located at [https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict](https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict).
 
 !!! warning
     These docs are currently incomplete
