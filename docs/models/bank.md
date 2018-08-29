@@ -34,16 +34,16 @@ Authorization: Bearer <secret-access-token>
 {
     "prediction_data": [
         {
-            "amount": 1,
-            "text": "ohnoes!"
+            "amount": 500,
+            "text": "Bank Statement Line"
         }
     ],
     "training_data": [
         {
-            "accountNumber": 1,
-            "amount": 1,
-            "entryType": 1,
-            "text": "some text",
+            "accountNumber": 10,
+            "amount": 500,
+            "entryType": 13,
+            "text": "Bank Statement Line",
             "timestamp": 2
         }
     ]
@@ -60,8 +60,8 @@ Content-Type: application/json
     "predictions": [
         {
             "label": {
-                "accountNumber": 1,
-                "entryType": 1
+                "accountNumber": 10,
+                "entryType": 13
             },
             "probability": 1.0
         }
