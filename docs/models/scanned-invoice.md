@@ -7,9 +7,6 @@ The API is a train-on-call API, meaning that the model first gets trained when a
 
 Unlike other train-on-call APIs the Scanned Invoice API does not accept the actual training data in the request, but instead expects a name in the request payload, this name should then be available as a protobuf blob on S3 in a bucket called `vml-autosuggest-production` under the path `incoming/smartscan/` followed by the dataset name submitted in the payload. The recommended format for that name is the name of the integrating service, followed by a slash, and lastly the name of the dataset, such as `smartscan/10023`.
 
-!!! warning
-    These docs are currently incomplete
-
 Schema
 ------
 
