@@ -54,7 +54,7 @@ When calling the service API, payload would look like this:
 
 ```json
 POST /model/electronic-invoice-line/v1/dataset/jimmys-icecream-truck.pb/predict
-Authorization: Bearer secret-access-token
+Authorization: Bearer <secret-access-token>
 
 {
     "inputs": [
