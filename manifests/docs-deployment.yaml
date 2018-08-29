@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: vml-docs
-          image: "quay.io/economic/vml-docs:latest"
+          image: "quay.io/economic/vml-docs"
           imagePullPolicy: Always
           ports:
           - containerPort: 80
