@@ -26,3 +26,7 @@ In case the API is unable to authenticate your request, you will receive a respo
 }
 ```
 
+Obtaining the Token
+-------------------
+
+There is currently no self service way of obtaining a token for use in the autosuggest products, the only way to obtain one is to contact the Product Owner of the VML products, Claus, and ask for one.
