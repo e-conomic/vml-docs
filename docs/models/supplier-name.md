@@ -11,7 +11,14 @@ The supplier name endpoint is located at: [https://autosuggest.ml.e-conomic.ws/m
 Schema
 ------
 
-On request, just supplier names are required. They are given as a list of mappings with the key `supplier_name`.
+When making requests, all that is required is the `prediction_data` and the `options` fields.
+
+`prediction_data` is suppose to be a list of mappings containing just one key-value pair called `supplier_name`.
+
+`options` there is two fields:
+
+- `suggestion_limit`: a integer limiting how many suggestions will be returned.
+- `class_filter`: list of known classes to limit suggestions to, set this to `null` if you do not want the suggestions limited.
 
 Request and Response
 --------------------
