@@ -25,7 +25,7 @@ before_deploy:
 deploy:
   - provider: script
     script: docker push quay.io/economic/vml-docs:latest &&
-            docker push quay.io/economic/vml-asgt-bank:$TRAVIS_BUILD_NUMBER
+            docker push quay.io/economic/vml-docs:$TRAVIS_BUILD_NUMBER
     on:
       branch: master
 notifications:
