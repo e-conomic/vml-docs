@@ -25,7 +25,7 @@ spec:
           limits:
             memory: 256M
         env:
-        - name: DEPLOY_TIME
+        - name: DEPLOY_TIME_NOW
           value: "\"${ execution['startTime'] }\""
       imagePullSecrets:
       - name: economic-vml-ro-pull-secret
