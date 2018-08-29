@@ -13,13 +13,11 @@ Schema
 
 The service has two schemas, one for the API and one for the protobuf dataset uploaded to S3.
 
-API
-===
+### API
 
 - `text` a list of strings.
 
-Dataset
-=======
+### Dataset
 
 A list of items, used to train on
 
