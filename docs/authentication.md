@@ -25,6 +25,7 @@ In case the API is unable to authenticate your request, you will receive a respo
     "description": <omitted for brevity>
 }
 ```
+The `description` is a human readable text indicating what is wrong.
 
 Obtaining the Token
 -------------------
