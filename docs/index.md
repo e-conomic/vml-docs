@@ -4,7 +4,7 @@
     Improve the introduction
 
 Traditional accounting involve a lot of manual data processing, when we use the computers to do the processing for us, we need to input that data correctly into the computer systems.
-Currently this means a lot of manual work, as least as long as many invoices and other papers are sent in documents meant for human eyes, as opposed to be machine readable.
+Currently this means a lot of manual work, at least as long as many invoices and other important documents are not designed to be directly readable by machines.
 
 This is where the VML team and our products come in. We are teaching computers to extract meaningful structured data from the unstructured data meant for humans - whether it be pictures of invoices or how to group bank entries when doing bank reconciliation.
 
