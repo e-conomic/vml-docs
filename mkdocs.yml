@@ -1,4 +1,4 @@
-site_name: Autosuggest Docs
+site_name: Autosuggest & Smartscan Docs
 nav:
     - What is Autosuggest: index.md
     - Authentication: authentication.md
@@ -12,8 +12,8 @@ theme:
   name: 'material'
   custom_dir: 'theme'
   palette:
-    primary: 'teal'
-    accent: 'teal'
+    primary: 'orange'
+    accent: 'orange'
 
 markdown_extensions:
   - codehilite
