@@ -1,5 +1,8 @@
 # Machine Learning <small>for intelligent ERP systems</small>
 
+!!! todo
+    Improve the introduction
+
 Traditional accounting involve a lot of manual data processing, when we use the computers to do the processing for us, we need to input that data correctly into the computer systems.
 Currently this means a lot of manual work, as least as long as many invoices and other papers are sent in documents meant for human eyes, as opposed to be machine readable.
 
