@@ -7,7 +7,7 @@ This is where the VML team and our products come in. We are teaching computers t
 
 ![machine-learning-diagram](img/machine-learning-diagram.png){: .center}
 
-Quisque et justo leo. Vivamus viverra magna a ante dictum consequat. Proin id libero vel quam facilisis consectetur. Aenean sed vestibulum erat. Phasellus nunc nisi, aliquam commodo risus at, aliquet pharetra tellus. Nulla facilisi. Etiam ornare nibh id dui mollis, quis vestibulum ante rhoncus. Duis sed quam efficitur nulla vulputate convallis. Vivamus vel volutpat ligula.
+By applying machines to automate previously manual processes, we can free up time to let employees better support customers, improve processes, and otherwise run the business better.
 
 ## The VML Team
 
