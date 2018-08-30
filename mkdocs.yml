@@ -2,16 +2,7 @@ site_name: VML Docs
 nav:
 - Getting Started [todo]: index.md
 - Smartscan [todo]: smartscan.md
-- Autosuggest:
-  - Overview: asgt.md
-  - Authentication: authentication.md
-  - Uploading Training Data: data-upload.md
-  - Models:
-    - Electronic invoice line: models/electronic-invoice-line.md
-    - Bank entry: models/bank-entry.md
-    - Scanned invoice: models/scanned-invoice.md
-    - Product info: models/product-info.md
-    - Supplier name: models/supplier-name.md
+- Autosuggest: autosuggest.md
 theme:
   name: 'material'
   custom_dir: 'theme'
