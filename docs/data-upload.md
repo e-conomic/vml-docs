@@ -42,4 +42,4 @@ s3.upload_file(local_dataset_path, bucket_name, dataset_path)
 ```
 
 !!! note
-    The shell method is generally not recommended for production, but rather as a quick and easy way to get started. Although you are missing good S3 SDKs, it could still be used as a last resort.
+    The shell method is generally not recommended for production, but rather as a quick and easy way to get started. Although if you are missing good S3 SDKs, it could still be used as a last resort.
