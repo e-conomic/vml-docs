@@ -1,7 +1,7 @@
 Scanned Invoice
 ===============
 
-The Scanned Invoice model predicts and makes suggestions on, the API is located at [https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict](https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict)
+The Scanned Invoice model predicts and makes suggestions on texts from SmartScan - acting like a enricher, the API is located at [https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict](https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict)
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
 
@@ -15,13 +15,13 @@ The service has two schemas, one for the API and one for the protobuf dataset up
 
 ### API
 
-- `text` a list of strings.
+- `text` a list of strings. Strings from the smartscan product.
 
 ### Dataset
 
 A list of items, used to train on
 
-- `text`, list of strings
+- `text`, list of strings from smartscan
 - `timestamp`, a datetime in the format `YYYY-MM-DDThh:mm:ssZ`
 - `targets`, a map of strings and strings
 
