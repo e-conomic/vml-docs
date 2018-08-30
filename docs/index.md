@@ -21,8 +21,8 @@ We have two main products, Smartscan and Autosuggest.
 
 ## Smartscan
 
-Smartscan is a document scanning service, you can submit certain types of documents, which our systems then process, and in the end returns values from.
-Such as from invoices, where our systems extract text and finds the most likely pieces of text that hold important numbers for invoices such as:
+Smartscan is a document scanning service, you can scans of invoices and receipts, which our systems then process, and in the end returns values from.
+Our systems extract text and finds the most likely pieces of text that hold important numbers and other data such as:
 
 - The total cost including/excluding VAT
 - The company that issued the invoice
