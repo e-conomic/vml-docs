@@ -7,6 +7,7 @@ nav:
       - Electronic Invoice Line: models/einvoice-model.md
       - Bank: models/bank.md
       - Scanned Invoice: models/scanned-invoice.md
+      - Supplier Name: models/supplier-name.md
 theme:
   name: 'material'
   custom_dir: 'theme'
