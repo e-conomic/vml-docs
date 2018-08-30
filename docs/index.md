@@ -37,8 +37,8 @@ Autosuggest is a series of smaller APIs that each provide very specialized funct
 
 ### Models
 
-- [Electronic Invoice Line](models/electronic-invoice-line.md)
-- [Bank Entry](models/bank-entry.md)
-- [Scanned Invoice](models/scanned-invoice.md)
-- [Supplier Name](models/supplier-name.md)
-- [Product Info](models/product-info.md)
+- [Electronic Invoice Line](autosuggest#electronic-invoice-line)
+- [Bank Entry](autosuggest#bank-entries)
+- [Scanned Invoice](autosuggest#scanned-invoice)
+- [Product Info](autosuggest#product-info)
+- [Supplier Name](autosuggest#supplier-name)
