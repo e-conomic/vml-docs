@@ -253,7 +253,11 @@ The API and the model it uses is made to make bank reconciliation easier by prov
 
 #### Location
 
-The prediction endpoint is located at [https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict](https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict).
+The prediction endpoint is located at
+
+```
+https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict
+```
 
 #### API Schema
 
@@ -315,7 +319,11 @@ Content-Type: application/json
 
 ### Scanned Invoice
 
-The Scanned Invoice model predicts and makes suggestions on texts from SmartScan - acting like a enricher, the API is located at [https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict](https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict)
+The Scanned Invoice model predicts and makes suggestions on texts from SmartScan - acting like a enricher, the API is located at
+
+```
+https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict
+```
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
 
@@ -510,7 +518,11 @@ The supplier name model uses pretrained models of known suppliers to suggest how
 
 #### Location
 
-The supplier name endpoint is located at: [https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict](https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict).
+The supplier name endpoint is located at
+
+```
+https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict
+```
 
 #### Schema
 
