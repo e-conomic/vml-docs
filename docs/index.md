@@ -17,10 +17,10 @@ We have demo datasets for all our APIs, the only thing you need to get started i
 !!! warning
     Demo datasets are not yet available
 
-Assuming we have previously uploaded a dataset called `user/3124232`, we could call the API like this:
+Assuming we have previously uploaded a dataset called `user/3124232` to the scanned-invoice API, we could call the API like this:
 
 ```json
-POST /model/scanned-invoice/v2/predict HTTP/1.1
+POST /model/scanned-invoice/v1/predict HTTP/1.1
 Authorization: Bearer secret-access-token
 
 {

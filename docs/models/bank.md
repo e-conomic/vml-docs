@@ -28,7 +28,7 @@ In the `prediction_data` list, the fields `amount` and `text` is required and al
 An full example of a API call can be seen below:
 
 ```json
-POST /model/bank/v1/predict
+POST /model/bank/v1/predict HTTP/1.1
 Authorization: Bearer <secret-access-token>
 
 {

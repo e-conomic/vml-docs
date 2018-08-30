@@ -31,7 +31,7 @@ Request and Response
 Example request:
 
 ```json
-POST /model/scanned-invoice/v1/predict
+POST /model/scanned-invoice/v1/predict HTTP/1.1
 Authorization: Bearer <secret-access-token>
 
 {

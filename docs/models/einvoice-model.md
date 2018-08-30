@@ -50,10 +50,10 @@ A dataset consists of multiple invoice lines all packed up into one protobuf fil
 Request and Response
 --------------------
 
-When calling the service API, payload would look like this:
+When calling the service API, payload would look like this, assuming the dataset we previously uploaded is called `jit.pb`:
 
 ```json
-POST /model/electronic-invoice-line/v1/dataset/jimmys-icecream-truck.pb/predict
+POST /model/electronic-invoice-line/v1/dataset/jit.pb/predict HTTP/1.1
 Authorization: Bearer <secret-access-token>
 
 {
