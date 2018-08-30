@@ -8,7 +8,7 @@ Authenticating Requests
 
 Say the token you have received is `348af00db8de0db6fff26b6d2c70a862`, you should include a `Authorization` header of the type `Bearer` with it in your request, here is a few snippets demonstrating how you could achieve setting the header correctly.
 
-**Shell**
+**cURL**
 ```shell
 $ curl --header "Authorization: Bearer 348af00db8de0db6fff26b6d2c70a862" ...
 ```
