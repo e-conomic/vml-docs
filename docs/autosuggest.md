@@ -128,14 +128,16 @@ s3.upload_file(local_dataset_path, bucket_name, dataset_path)
 !!! note
     The shell method is generally not recommended for production, but rather as a quick and easy way to get started. Although if you are missing good S3 SDKs, it could still be used as a last resort.
 
-## Electronic Invoice Line
+## Models
+
+### Electronic Invoice Line
 
 Othsewise known as EIL, it can make predictions on how to categorize a new invoice line, in a HTTP request, given historic categorizations, given from the training data in the dataset.
 
 !!! warning
     Improve the description of what the EIL actually does, explain model and targets.
 
-### Schema
+#### Schema
 
 The base schema of the Electronic Invoice Line is the following fields:
 
@@ -167,14 +169,14 @@ As json, this could look like:
 
 Note that all fields are required, but all are nullable with the exception of `supplier_id`. So while required, sending `null` values are allowed.
 
-### As Training Data
+#### As Training Data
 
 A dataset consists of multiple invoice lines all packed up into one protobuf file. The protobuf contains a top level item called `Dataset` and under that is a sequence of items called `invoicelines`, where all the invoice lines that make up a dataset goes.
 
 !!! warning
     Include a link to the protobuf definition, that is easier to get to than the file in the github repo.
 
-### Request and Response
+#### Request and Response
 
 When calling the service API, payload would look like this, assuming the dataset we previously uploaded is called `jit.pb`:
 
@@ -234,7 +236,7 @@ Having the confidence included means that you can discard predictions under a ce
 
 The response may also include other headers, but those should not be seen as a part of the API and may change over time.
 
-### Caveats & Troubleshooting
+#### Caveats & Troubleshooting
 
 - **Zero Confidence Predictions**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
 
@@ -243,17 +245,17 @@ The response may also include other headers, but those should not be seen as a p
 - **Not Found Responses**: As a model trains and targets are saved, they gradually become available via the API. As a result you might not see the trained targets available right away, but it should be reasonably safe to just repeat calling the prediction endpoint until the model becomes available - although the usual backoff is recommended.
 Furthermore, even a single unavailable target will currently abort the request, therefore it is geneally advised to call targets individually, so one missing target will not distrubt predictions on other targets.
 
-## Bank Entries
+### Bank Entries
 
 The Bank API is a train-on-call ML API, meaning that the training dataset is provided in the request payload along with the prediction data. This imposes some limits on how large the training data can be in order to keep response times acceptable.
 
 The API and the model it uses is made to make bank reconciliation easier by providing suggestions on how to act on the data.
 
-### Location
+#### Location
 
 The prediction endpoint is located at [https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict](https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict).
 
-### API Schema
+#### API Schema
 
 The API takes a JSON payload with two required lists: `prediction_data` and `training_data`. The former is filled with incomplete data to make predictions on and the latter is filled with complete entries to guide the predictions.
 
@@ -311,7 +313,7 @@ Content-Type: application/json
 }
 ```
 
-## Scanned Invoice
+### Scanned Invoice
 
 The Scanned Invoice model predicts and makes suggestions on texts from SmartScan - acting like a enricher, the API is located at [https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict](https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict)
 
@@ -320,15 +322,15 @@ The API is a train-on-call API, meaning that the model first gets trained when a
 Unlike other train-on-call APIs the Scanned Invoice API does not accept the actual training data in the request, but instead expects a name in the request payload, this name should then be available as a protobuf blob on S3 in a bucket called `vml-autosuggest-production` under the path `{username}/incoming/smartscan/` followed by the dataset name submitted in the payload. The `username` used, should be the username your API key corresponds to.
 The recommended format for that name is the name of the integrating service, followed by a slash, and lastly the name of the dataset, such as `smartscan/10023`.
 
-### Schema
+#### Schema
 
 The service has two schemas, one for the API and one for the protobuf dataset uploaded to S3.
 
-### API
+#### API
 
 - `text` a list of strings. Strings from the smartscan product.
 
-### Dataset
+#### Dataset
 
 A list of items, used to train on
 
@@ -336,7 +338,7 @@ A list of items, used to train on
 - `timestamp`, a datetime in the format `YYYY-MM-DDThh:mm:ssZ`
 - `targets`, a map of strings and strings
 
-### Request and Response
+#### Request and Response
 
 Example request:
 
@@ -382,7 +384,7 @@ Content-Type: application/json
 }
 ```
 
-## Product Info
+### Product Info
 
 The Product Info API is a small ML API build for Kompa.new. The service takes
 the text from an invoice/order line and maps the text to a unit and unit\_type.
@@ -392,13 +394,13 @@ entered as part of creating an invoice.
 
 The service has models for `da` and `se`.
 
-### Location
+#### Location
 The api is available here:
 ```
 https://autosuggest.ml.e-conomic.ws/model/albert-productinfo/v1/predict
 ```
 
-### API Schema
+#### API Schema
 The API takes a JSON payload with `input` and `language` being required keys.
 
 * `input`: a list of strings (order line entries)
@@ -502,15 +504,15 @@ Content-Type: application/json
 }
 ```
 
-## Supplier Name
+### Supplier Name
 
 The supplier name model uses pretrained models of known suppliers to suggest how the supplier should be classified.
 
-### Location
+#### Location
 
 The supplier name endpoint is located at: [https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict](https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict).
 
-### Schema
+#### Schema
 
 
 When making requests, all that is required is the `prediction_data` and the `options` fields.
@@ -522,7 +524,7 @@ When making requests, all that is required is the `prediction_data` and the `opt
 - `suggestion_limit`: a integer limiting how many suggestions will be returned.
 - `class_filter`: list of known classes to limit suggestions to, set this to `null` if you do not want the suggestions limited.
 
-### Request and Response
+#### Request and Response
 
 ```json
 POST /model/supplier-name/v1/predict HTTP/1.1
