@@ -3,7 +3,7 @@ nav:
 - Getting Started [todo]: index.md
 - Smartscan [todo]: smartscan.md
 - Autosuggest:
-  - What is that: asgt.md
+  - Overview: asgt.md
   - Authentication: authentication.md
   - Uploading Training Data: data-upload.md
   - Models:
