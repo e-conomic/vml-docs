@@ -1,32 +1,32 @@
-site_name: VML API Docs
+site_name: VML Docs
 nav:
-- What is Autosuggest: index.md
-- Authentication: authentication.md
-- Uploading Training Data: data-upload.md
-- Models:
-  - Electronic invoice line: models/einvoice-model.md
-  - Bank entry: models/bank.md
-  - Scanned invoice: models/scanned-invoice.md
-  - Product Info: models/supplier-name.md
-  - EA supplier name: models/supplier-name.md
-- Support: models/supplier-name.md
-# - Smartscan:
-#   - What is smartscan: smartscan.md
+- Getting Started [todo]: index.md
+- Smartscan [todo]: smartscan.md
+- Autosuggest:
+  - What is that: asgt.md
+  - Authentication: authentication.md
+  - Uploading Training Data: data-upload.md
+  - Models:
+    - Electronic invoice line: models/electronic-invoice-line.md
+    - Bank entry: models/bank-entry.md
+    - Scanned invoice: models/scanned-invoice.md
+    - Product info: models/product-info.md
+    - Supplier name: models/supplier-name.md
 theme:
   name: 'material'
   custom_dir: 'theme'
   palette:
-    primary: 'indigo'
-    accent: 'pink'
+    primary: 'teal'
+    accent: 'teal'
   feature:
     tabs: false
 
 markdown_extensions:
-  - codehilite
-  - toc:
-      permalink: true
-  - admonition
-  - pymdownx.superfences
+- codehilite
+- toc:
+    permalink: true
+- admonition
+- pymdownx.superfences
 
 extra_css:
 - stylesheets/extra.css
