@@ -25,21 +25,11 @@ Uploading Examples
 
 There is various ways you can upload datasets to S3 buckets, most languages have SDKs for AWS services - or at very least to S3. Here is some small examples of how you could upload datasets to the Autosuggest systems, although this is not an exhaustive list.
 
-### Shell
-
-Amazon has a [CLI tool](https://aws.amazon.com/cli/) for interacting with a many of their services via the shell, to use it to upload the a dataset you could use a command like this:
-
-```shell
+``` shell tab="Shell"
 $ aws s3 cp jimmys-icecream-truck.pb s3://asgt.dataset.production/bru/electronic-invoice-line/
 ```
 
-You might not want to use the shell approach in production, but for getting started and uploading _some_ data to be able to see how the predictions work, manually uploading via the CLI is quite alright.
-
-### Python
-
-AWS provide the [boto3](https://pypi.org/project/boto3/) SDK for Python, and it has several ways of working with it, this is just one example, adapted from the [boto3 docs](https://boto3.readthedocs.io/en/latest/guide/s3-example-creating-buckets.html#upload-a-file-to-an-amazon-s3-bucket):
-
-```python
+``` python tab="python"
 import boto3
 
 s3 = boto3.client('s3')
@@ -49,5 +39,15 @@ bucket_name = 'asgt.dataset.production'
 
 s3.upload_file(dataset_path, bucket_name, dataset_path)
 ```
+
+### Shell
+
+Amazon has a [CLI tool](https://aws.amazon.com/cli/) for interacting with a many of their services via the shell, to use it to upload the a dataset you could use a command like this:
+
+### Python
+
+AWS provide the [boto3](https://pypi.org/project/boto3/) SDK for Python, and it has several ways of working with it, this is just one example, adapted from the [boto3 docs](https://boto3.readthedocs.io/en/latest/guide/s3-example-creating-buckets.html#upload-a-file-to-an-amazon-s3-bucket)
+
+You might not want to use the shell approach in production, but for getting started and uploading _some_ data to be able to see how the predictions work, manually uploading via the CLI is quite alright.
 
 This example assumes that the dataset has been written to disk beforehand, but it is also possible to skip that step and upload directly from a dataset in memory.
