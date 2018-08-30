@@ -6,14 +6,14 @@ The dataset format depends on the service, as each service will make predictions
 When uploading the dataset, there is a S3 bucket defined as well as a path, the bucket is `asgt.dataset.{environment}` and the path is `{user_id}/{autosuggest_service_name}/{dataset_name}`.
 Lets for the sake of an example say we are a small business accounting company called "Bills 'R Us", we have a customer called "Jimmy's Icecream Truck", and we really want to get predictions from the Autosuggest service "Electronic-Invoice-Line", in the "production" environment.
 
-When building the dataset, it needs to be build in accordance with the format used by the model used by the Electronic-Invoice-Line service. We name the dataset something we can remember relates to the customer we want to predict on such as `jimmys-icecream-truck` (although an id of sorts would suffice as well). Since it is a protobuf it is required by our systems to append `.pb` to the name of the dataset, making it `jimmys-icecream-truck.pb`.
+When building the dataset, it needs to be build in accordance with the format used by the model used by the Electronic-Invoice-Line service. We name the dataset something we can remember relates to the customer we want to predict on such as `jimmys-icecream-truck` (although an id of sorts would suffice as well), but it is a bit long for the example so we shorten it to `jit`. Since it is a protobuf it is required by our systems to append `.pb` to the name of the dataset, making it `jit.pb`.
 
 !!! tip
     When training, a number of transformations happen on the data, notably the dataset gets transformed into so-called `dataframes`, where the names of the colums are derived from the names on the fields of the data. In the case the first item in the protobuf is empty, the column names gets transformed incorrectly, and as a result the dataset does not contain any targets.
 
     So make sure the datasets do not contain empty lines.
 
-With the dataset in hand, we can now upload it. Since we want to upload it to the production environment, we need to upload it to the S3 bucket called `asgt.dataset.production` with the path `bru/electronic-invoice-line/jimmys-icecream-truck.pb`, with `bru` being the username of our company account.
+With the dataset in hand, we can now upload it. Since we want to upload it to the production environment, we need to upload it to the S3 bucket called `asgt.dataset.production` with the path `bru/electronic-invoice-line/jit.pb`, with `bru` being the username of our company account.
 We use AWS access credentials provided by the VML product team - the developers behind the Autosuggest service.
 
 Once we have uploaded the data the Autosuggest systems take over, training the model for the service with the dataset, producing as many targets as the datasets defines.
@@ -26,7 +26,7 @@ Uploading Examples
 There are many ways to upload data to S3, and most languages have SDKs (if not several) for AWS services - or at very least just to S3. Below we have simple code examples of how you could upload data.
 
 ``` shell tab="Shell"
-$ aws s3 cp jimmys-icecream-truck.pb s3://asgt.dataset.production/bru/electronic-invoice-line/
+$ aws s3 cp jit.pb s3://asgt.dataset.production/bru/electronic-invoice-line/
 ```
 
 ``` python tab="Python"
@@ -34,8 +34,8 @@ import boto3
 
 s3 = boto3.client('s3')
 
-local_dataset_path = 'jimmys-icecream-truck.pb'
-dataset_path = 'bru/electronic-invoice-line/jimmys-icecream-truck.pb'
+local_dataset_path = 'jit.pb'
+dataset_path = 'bru/electronic-invoice-line/jit.pb'
 bucket_name = 'asgt.dataset.production'
 
 s3.upload_file(local_dataset_path, bucket_name, dataset_path)
