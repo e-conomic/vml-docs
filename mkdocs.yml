@@ -1,22 +1,30 @@
-site_name: Autosuggest & Smartscan Docs
+site_name: VML API Docs
 nav:
-    - What is Autosuggest: index.md
-    - Authentication: authentication.md
-    - Uploading Training Data: data-upload.md
-    - Models:
-      - Electronic Invoice Line: models/einvoice-model.md
-      - Bank: models/bank.md
-      - Scanned Invoice: models/scanned-invoice.md
-      - Supplier Name: models/supplier-name.md
+- What is Autosuggest: index.md
+- Authentication: authentication.md
+- Uploading Training Data: data-upload.md
+- Models:
+  - Electronic invoice line: models/einvoice-model.md
+  - Bank entry: models/bank.md
+  - Scanned invoice: models/scanned-invoice.md
+  - Product Info: models/supplier-name.md
+  - EA supplier name: models/supplier-name.md
+- Support: models/supplier-name.md
+# - Smartscan:
+#   - What is smartscan: smartscan.md
 theme:
   name: 'material'
   custom_dir: 'theme'
   palette:
-    primary: 'orange'
-    accent: 'orange'
+    primary: 'indigo'
+    accent: 'pink'
+  feature:
+    tabs: false
 
 markdown_extensions:
   - codehilite
   - toc:
       permalink: true
   - admonition
+extra_css:
+- stylesheets/extra.css
