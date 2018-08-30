@@ -1,6 +1,9 @@
 # Machine Learning <small>for intelligent ERP systems</small>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam consequat luctus enim vel condimentum. Sed pharetra, magna a bibendum interdum, enim libero dapibus lorem, eu egestas ex lacus ac magna. Praesent pharetra justo vel quam gravida rutrum. Duis fringilla ultricies tempor. Nullam vitae nisl turpis. Nam non purus facilisis, fringilla ex quis, pulvinar augue. Donec volutpat libero vel magna sodales condimentum. Suspendisse ut euismod neque, eu vehicula lacus.
+Traditional accounting involve a lot of manual data processing, when we use the computers to do the processing for us, we need to input that data correctly into the computer systems.
+Currently this means a lot of manual work, as least as long as many invoices and other papers are sent in documents meant for human eyes, as opposed to be machine readable.
+
+This is where the VML team and our products come in. We are teaching computers to extract meaningful structured data from the unstructured data meant for humans - whether it be pictures of invoices or how to group bank entries when doing bank reconciliation.
 
 ![machine-learning-diagram](img/machine-learning-diagram.png){: .center}
 
