@@ -39,5 +39,3 @@ Autosuggest is a series of smaller APIs that each provide very specialized funct
 - [Scanned Invoice](models/scanned-invoice.md)
 - [Supplier Name](models/supplier-name.md)
 - [Product Info](models/product-info.md)
-
-## Find us at
