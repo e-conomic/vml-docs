@@ -1,7 +1,7 @@
 site_name: VML Docs
 nav:
-- Getting Started [todo]: index.md
-- Smartscan [todo]: smartscan.md
+- Getting Started: index.md
+- Smartscan [wip]: smartscan.md
 - Autosuggest: autosuggest.md
 theme:
   name: 'material'
