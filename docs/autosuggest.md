@@ -240,7 +240,7 @@ A dataset consists of multiple invoice lines all packed up into one protobuf fil
 !!! warning
     Include a link to the protobuf definition, that is easier to get to than the file in the github repo.
 
-#### Request and Response
+#### Example Request
 
 When calling the service API, payload would look like this, assuming the dataset we previously uploaded is called `jit.pb`:
 
@@ -402,15 +402,15 @@ The API is a train-on-call API, meaning that the model first gets trained when a
 Unlike other train-on-call APIs the Scanned Invoice API does not accept the actual training data in the request, but instead expects a name in the request payload, this name should then be available as a protobuf blob on S3 in a bucket called `vml-autosuggest-production` under the path `{username}/incoming/smartscan/` followed by the dataset name submitted in the payload. The `username` used, should be the username your API key corresponds to.
 The recommended format for that name is the name of the integrating service, followed by a slash, and lastly the name of the dataset, such as `smartscan/10023`.
 
-#### Schema
+#### Schemas
 
 The service has two schemas, one for the API and one for the protobuf dataset uploaded to S3.
 
-##### API
+**API**
 
 - `text` a list of strings. Strings from the smartscan product.
 
-##### Dataset
+**Dataset**
 
 A list of items, used to train on
 
@@ -418,7 +418,7 @@ A list of items, used to train on
 - `timestamp`, a datetime in the format `YYYY-MM-DD'T'hh:mm:ss'Z'`
 - `targets`, a map of strings and strings
 
-#### Request and Response
+#### Example Request
 
 Example request:
 
@@ -613,22 +613,22 @@ When making requests, all that is required is the `prediction_data` and the `opt
 - `suggestion_limit`: a integer limiting how many suggestions will be returned.
 - `class_filter`: list of known classes to limit suggestions to, set this to `null` if you do not want the suggestions limited.
 
-#### Request and Response
+#### Example Request
 
 ```json
 POST /model/supplier-name/v1/predict HTTP/1.1
 Authorization: Bearer <secret-access-token>
 
 {
-    "prediction_data": [
-        {
-            "supplier_name": "Dogwood Inc"
-        }
-    ],
-    "options": {
-        "suggestion_limit": 2,
-        "class_filter": null
+  "prediction_data": [
+    {
+      "supplier_name": "Dogwood Inc"
     }
+  ],
+  "options": {
+    "suggestion_limit": 2,
+    "class_filter": null
+  }
 }
 ```
 
@@ -637,21 +637,21 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-    "result": [
+  "result": [
+    {
+      "known_supplier": false,
+      "suggestions": [
         {
-            "known_supplier": false,
-            "suggestions": [
-                {
-                    "class": "4000",
-                    "proba": 0.09
-                },
-                {
-                    "class": "6850",
-                    "proba": 0.07
-                }
-            ]
+          "class": "4000",
+          "proba": 0.09
+        },
+        {
+          "class": "6850",
+          "proba": 0.07
         }
-    ]
+      ]
+    }
+  ]
 }
 ```
 
