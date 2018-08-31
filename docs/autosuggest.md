@@ -241,7 +241,7 @@ The response may also include other headers, but those should not be seen as a p
 - **Zero Confidence Predictions**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
 
 - **Not Found Responses**: As a model trains and targets are saved, they gradually become available via the API. As a result you might not see the trained targets available right away, but it should be reasonably safe to just repeat calling the prediction endpoint until the model becomes available - although the usual backoff is recommended.
-Furthermore, even a single unavailable target will currently abort the request, therefore it is geneally advised to call targets individually, so one missing target will not distrubt predictions on other targets.
+Furthermore, even a single unavailable target will currently abort the request, therefore it is generally advised to call targets individually, so one missing target will not distrubt predictions on other targets.
 
 ### Bank Entries
 
@@ -341,7 +341,7 @@ The service has two schemas, one for the API and one for the protobuf dataset up
 A list of items, used to train on
 
 - `text`, list of strings from smartscan
-- `timestamp`, a datetime in the format `YYYY-MM-DDThh:mm:ssZ`
+- `timestamp`, a datetime in the format `YYYY-MM-DD'T'hh:mm:ss'Z'`
 - `targets`, a map of strings and strings
 
 #### Request and Response
@@ -393,7 +393,7 @@ Content-Type: application/json
 ### Product Info
 
 The Product Info API is a small ML API build for Kompa.new. The service takes
-the text from an invoice/order line and maps the text to a unit and unit\_type.
+the text from an invoice/order line and maps the text to a unit and unit_type.
 
 The use case is to automaticly fill out the unit of an orderline that has been
 entered as part of creating an invoice.
