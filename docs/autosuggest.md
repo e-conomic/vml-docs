@@ -42,10 +42,16 @@ We exchange user datasets using our secure S3 as shared storage facility. When w
 
 ## Hostname
 
-The Autosuggest API is:
+The Autosuggest production API is:
 
 ```
 https://autosuggest.ml.e-conomic.ws
+```
+
+In addition we also have a staging environment available, but note that this is also the staging environment we use internally to test and roll out changes, so while it should at most times be behaving as production, at times it is unavoidable that it might be unreliable or unavailable for shorter durations. The staging environment is at:
+
+```
+https://autosuggest.staging.ml.e-conomic.ws
 ```
 
 Each endpoint is mounted as a path on the host.
