@@ -51,6 +51,9 @@ Content-Type: application/json
 }
 ```
 
+That is all. Now you can present the customer with a suggestion, booking the
+invoice on account `3620` if you feel the `confidence` level is acceptable.
+
 
 ## Environments
 
