@@ -58,8 +58,7 @@ Each endpoint is mounted as a path on the host.
 
 ## Authentication
 
-
-All Autosuggest endpoints require authentication in the form of a bearer header on each request.
+All Autosuggest endpoints require authentication in the form of a bearer header on each request. Each environment has a unique set of credentials, so if you want access to both production and staging, you will have to have two sets of credentials.
 
 ### Authenticating Requests
 
