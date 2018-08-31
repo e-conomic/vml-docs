@@ -40,9 +40,9 @@ Content-Type: application/json
 Customers often behave differently, needing different predictions to the same input. Therefore it is generally recommended to build a dataset per costumer in order to have the algorithms learn the correct behaviour of each customer.
 We exchange user datasets using our secure S3 as shared storage facility. When we handle your data it is always encrypted at rest (with Hardware Security Modules) and in transfer (TLS) with state of the art encryption solutions.
 
-## Hostname
+## Environments
 
-The Autosuggest production API is:
+The Autosuggest production environment is:
 
 ```
 https://autosuggest.ml.e-conomic.ws
@@ -54,7 +54,7 @@ In addition we also have a staging environment available, but note that this is 
 https://autosuggest.staging.ml.e-conomic.ws
 ```
 
-Each endpoint is mounted as a path on the host.
+Each endpoint is mounted as a path on the host, and in the examples we have omtitted the hosts from the URL, for the sake of readability.
 
 ## Authentication
 
@@ -167,6 +167,8 @@ The Electronic Invoice Line model endpoint is
 ```
 
 Obviously the `dataset_name` would need to be replaced with whichever dataset you want your predictions to be based on. Likewise your authentication needs to have rights to access to the trained model, as explained in the [data upload section](#uploading-training-data).
+
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
 #### Schema
 
@@ -290,6 +292,8 @@ The prediction endpoint is
 
 Because the model trains on request, there is no need to specify a dataset in the path of the URL.
 
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
+
 #### API Schema
 
 The API takes a JSON payload with two required lists: `prediction_data` and `training_data`. The former is filled with incomplete data to make predictions on and the latter is filled with complete entries to guide the predictions.
@@ -359,6 +363,8 @@ The Scanned-Invoice endpoint is at:
 ```
 /model/scanned-invoice/v1/predict
 ```
+
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
 
@@ -444,6 +450,8 @@ The Product Info endpoint is:
 ```
 /model/albert-productinfo/v1/predict
 ```
+
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
 #### API Schema
 The API takes a JSON payload with `input` and `language` being required keys.
@@ -560,6 +568,8 @@ The supplier name endpoint is:
 ```
 /model/supplier-name/v1/predict
 ```
+
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
 #### Schema
 
