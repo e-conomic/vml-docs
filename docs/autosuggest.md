@@ -152,7 +152,7 @@ Othsewise known as EIL, it can make predictions on how to categorize a new invoi
 The Electronic Invoice Line model endpoint is
 
 ```
-{host}/model/electronic-invoice-line/v1/dataset/{dataset_name}/predict
+/model/electronic-invoice-line/v1/dataset/{dataset_name}/predict
 ```
 
 Obviously the `dataset_name` would need to be replaced with whichever dataset you want your predictions to be based on. Likewise your authentication needs to have rights to access to the trained model, as explained in the [data upload section](#uploading-training-data).
@@ -276,7 +276,7 @@ The API and the model it uses is made to make bank reconciliation easier by prov
 The prediction endpoint is
 
 ```
-{host}/model/bank/v1/predict
+/model/bank/v1/predict
 ```
 
 Because the model trains on request, there is no need to specify a dataset in the path of the URL.
@@ -348,7 +348,7 @@ The Scanned Invoice model predicts and makes suggestions on texts from SmartScan
 The Scanned-Invoice endpoint is at:
 
 ```
-{host}/model/scanned-invoice/v1/predict
+/model/scanned-invoice/v1/predict
 ```
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
@@ -433,7 +433,7 @@ The service has models for `da` and `se`.
 The Product Info endpoint is:
 
 ```
-{host}/model/albert-productinfo/v1/predict
+/model/albert-productinfo/v1/predict
 ```
 
 #### API Schema
@@ -549,7 +549,7 @@ The supplier name model uses pretrained models of known suppliers to suggest how
 The supplier name endpoint is:
 
 ```
-{host}/model/supplier-name/v1/predict
+/model/supplier-name/v1/predict
 ```
 
 #### Schema
