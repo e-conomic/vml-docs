@@ -168,6 +168,8 @@ The Electronic Invoice Line model endpoint is
 
 Obviously the `dataset_name` would need to be replaced with whichever dataset you want your predictions to be based on. Likewise your authentication needs to have rights to access to the trained model, as explained in the [data upload section](#uploading-training-data).
 
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
+
 #### Schema
 
 The base schema of the Electronic Invoice Line is the following fields:
@@ -290,6 +292,8 @@ The prediction endpoint is
 
 Because the model trains on request, there is no need to specify a dataset in the path of the URL.
 
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
+
 #### API Schema
 
 The API takes a JSON payload with two required lists: `prediction_data` and `training_data`. The former is filled with incomplete data to make predictions on and the latter is filled with complete entries to guide the predictions.
@@ -359,6 +363,8 @@ The Scanned-Invoice endpoint is at:
 ```
 /model/scanned-invoice/v1/predict
 ```
+
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
 
@@ -444,6 +450,8 @@ The Product Info endpoint is:
 ```
 /model/albert-productinfo/v1/predict
 ```
+
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
 #### API Schema
 The API takes a JSON payload with `input` and `language` being required keys.
@@ -560,6 +568,8 @@ The supplier name endpoint is:
 ```
 /model/supplier-name/v1/predict
 ```
+
+Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
 #### Schema
 
