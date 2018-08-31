@@ -1,4 +1,4 @@
-# Machine Learning <small>for intelligent ERP systems</small>
+# Visma Machine Learning <small>for intelligent ERP systems</small>
 
 !!! todo
     Improve the introduction
