@@ -40,13 +40,27 @@ Content-Type: application/json
 Customers often behave differently, needing different predictions to the same input. Therefore it is generally recommended to build a dataset per costumer in order to have the algorithms learn the correct behaviour of each customer.
 We exchange user datasets using our secure S3 as shared storage facility. When we handle your data it is always encrypted at rest (with Hardware Security Modules) and in transfer (TLS) with state of the art encryption solutions.
 
+## Hostname
+
+The Autosuggest production API is:
+
+```
+https://autosuggest.ml.e-conomic.ws
+```
+
+In addition we also have a staging environment available, but note that this is also the staging environment we use internally to test and roll out changes, so while it should at most times be behaving as production, at times it is unavoidable that it might be unreliable or unavailable for shorter durations. The staging environment is at:
+
+```
+https://autosuggest.staging.ml.e-conomic.ws
+```
+
+Each endpoint is mounted as a path on the host.
+
 ## Authentication
 
-
-All Autosuggest endpoints require authentication in the form of a bearer header on each request.
+All Autosuggest endpoints require authentication in the form of a bearer header on each request. Each environment has a unique set of credentials, so if you want access to both production and staging, you will have to have two sets of credentials.
 
 ### Authenticating Requests
-
 
 Say the token you have received is `348af00db8de0db6fff26b6d2c70a862`, you should include a `Authorization` header of the type `Bearer` with it in your request, here is a few snippets demonstrating how you could achieve setting the header correctly.
 
@@ -143,6 +157,16 @@ Othsewise known as EIL, it can make predictions on how to categorize a new invoi
 
 !!! warning
     Improve the description of what the EIL actually does, explain model and targets.
+
+#### Endpoint
+
+The Electronic Invoice Line model endpoint is
+
+```
+/model/electronic-invoice-line/v1/dataset/{dataset_name}/predict
+```
+
+Obviously the `dataset_name` would need to be replaced with whichever dataset you want your predictions to be based on. Likewise your authentication needs to have rights to access to the trained model, as explained in the [data upload section](#uploading-training-data).
 
 #### Schema
 
@@ -256,13 +280,15 @@ The Bank API is a train-on-call ML API, meaning that the training dataset is pro
 
 The API and the model it uses is made to make bank reconciliation easier by providing suggestions on how to act on the data.
 
-#### Location
+#### Endpoint
 
-The prediction endpoint is located at
+The prediction endpoint is
 
 ```
-https://autosuggest.ml.e-conomic.ws/model/bank/v1/predict
+/model/bank/v1/predict
 ```
+
+Because the model trains on request, there is no need to specify a dataset in the path of the URL.
 
 #### API Schema
 
@@ -324,10 +350,14 @@ Content-Type: application/json
 
 ### Scanned Invoice
 
-The Scanned Invoice model predicts and makes suggestions on texts from SmartScan - acting like a enricher, the API is located at
+The Scanned Invoice model predicts and makes suggestions on texts from SmartScan - acting like a enricher.
+
+#### Endpoint
+
+The Scanned-Invoice endpoint is at:
 
 ```
-https://autosuggest.ml.e-conomic.ws/model/scanned-invoice/v1/predict
+/model/scanned-invoice/v1/predict
 ```
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
@@ -339,11 +369,11 @@ The recommended format for that name is the name of the integrating service, fol
 
 The service has two schemas, one for the API and one for the protobuf dataset uploaded to S3.
 
-#### API
+##### API
 
 - `text` a list of strings. Strings from the smartscan product.
 
-#### Dataset
+##### Dataset
 
 A list of items, used to train on
 
@@ -407,19 +437,21 @@ entered as part of creating an invoice.
 
 The service has models for `da` and `se`.
 
-#### Location
-The api is available here:
+#### Endpoint
+
+The Product Info endpoint is:
+
 ```
-https://autosuggest.ml.e-conomic.ws/model/albert-productinfo/v1/predict
+/model/albert-productinfo/v1/predict
 ```
 
 #### API Schema
 The API takes a JSON payload with `input` and `language` being required keys.
 
-* `input`: a list of strings (order line entries)
-* `language`: Should be set to either `da` or `se`
+- `input`: a list of strings (order line entries)
+- `language`: Should be set to either `da` or `se`
 
-An full example of a API call can be seen below:
+A full example of a API call can be seen below:
 
 ```json
 POST /model/bank/v1/predict HTTP/1.1
@@ -521,16 +553,15 @@ Content-Type: application/json
 
 The supplier name model uses pretrained models of known suppliers to suggest how the supplier should be classified.
 
-#### Location
+#### Endpoint
 
-The supplier name endpoint is located at
+The supplier name endpoint is:
 
 ```
-https://autosuggest.ml.e-conomic.ws/model/supplier-name/v1/predict
+/model/supplier-name/v1/predict
 ```
 
 #### Schema
-
 
 When making requests, all that is required is the `prediction_data` and the `options` fields.
 
