@@ -37,17 +37,33 @@ POST /model/scanned-invoice/v1/dataset/3124232.pb/predict HTTP/1.1
 Authorization: Bearer secret-access-token
 
 {
-    "input": [{"description": "Taxi to customer meeting"}],
-    "targets": ["account"]
-    "options": {"suggestion_limit": 1},
-
+  "input": [
+    {
+      "description": "Taxi to customer meeting"
+    }
+  ],
+  "targets": [
+    "account"
+  ],
+  "options": {
+    "suggestion_limit": 1
+  }
 }
 
 HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-    "predictions": [{"account": [{"confidence": 0.19, "label": "3620"}]}]
+  "predictions": [
+    {
+      "account": [
+        {
+          "confidence": 0.19,
+          "label": "3620"
+        }
+      ]
+    }
+  ]
 }
 ```
 
