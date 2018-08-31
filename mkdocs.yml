@@ -3,6 +3,7 @@ nav:
 - Getting Started: index.md
 - Smartscan [wip]: smartscan.md
 - Autosuggest: autosuggest.md
+- Support: support.md
 theme:
   name: 'material'
   custom_dir: 'theme'
