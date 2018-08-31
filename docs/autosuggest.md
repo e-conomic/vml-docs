@@ -62,7 +62,6 @@ All Autosuggest endpoints require authentication in the form of a bearer header 
 
 ### Authenticating Requests
 
-
 Say the token you have received is `348af00db8de0db6fff26b6d2c70a862`, you should include a `Authorization` header of the type `Bearer` with it in your request, here is a few snippets demonstrating how you could achieve setting the header correctly.
 
 ``` shell tab="cURL"
@@ -558,7 +557,6 @@ The supplier name endpoint is:
 ```
 
 #### Schema
-
 
 When making requests, all that is required is the `prediction_data` and the `options` fields.
 
