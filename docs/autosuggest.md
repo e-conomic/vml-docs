@@ -236,11 +236,9 @@ Having the confidence included means that you can discard predictions under a ce
 
 The response may also include other headers, but those should not be seen as a part of the API and may change over time.
 
-#### Caveats & Troubleshooting
+#### Caveats
 
 - **Zero Confidence Predictions**: Some times the dataset only provide one classification for a certain value, as a safety mechanism the EIL model will in those cases return a prediction with 0 confidence, based on the assumption that the dataset was biased.
-
-- **Bad Request Responses**: If you make a request to the API and get a 400 Bad Request, you are always returned a snippet of JSON, that contains information on what was wrong with the request.
 
 - **Not Found Responses**: As a model trains and targets are saved, they gradually become available via the API. As a result you might not see the trained targets available right away, but it should be reasonably safe to just repeat calling the prediction endpoint until the model becomes available - although the usual backoff is recommended.
 Furthermore, even a single unavailable target will currently abort the request, therefore it is geneally advised to call targets individually, so one missing target will not distrubt predictions on other targets.
@@ -577,3 +575,7 @@ Content-Type: application/json
     ]
 }
 ```
+
+## Troubleshooting
+
+The Autosuggest API tries to be as helpful as possible, so even in the event that the data in the request is malformed, the schema validation will try make sure to provide some meaningfull feedback on what is wrong with the data. So if you happen to get a 400 Bad Request response, the easiest way to debug this is to inspect the JSON of the response.
