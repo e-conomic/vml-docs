@@ -40,9 +40,9 @@ Content-Type: application/json
 Customers often behave differently, needing different predictions to the same input. Therefore it is generally recommended to build a dataset per costumer in order to have the algorithms learn the correct behaviour of each customer.
 We exchange user datasets using our secure S3 as shared storage facility. When we handle your data it is always encrypted at rest (with Hardware Security Modules) and in transfer (TLS) with state of the art encryption solutions.
 
-## Hostname
+## Environments
 
-The Autosuggest production API is:
+The Autosuggest production environment is:
 
 ```
 https://autosuggest.ml.e-conomic.ws
@@ -54,7 +54,7 @@ In addition we also have a staging environment available, but note that this is 
 https://autosuggest.staging.ml.e-conomic.ws
 ```
 
-Each endpoint is mounted as a path on the host.
+Each endpoint is mounted as a path on the host, and in the examples we have omtitted the hosts from the URL, for the sake of readability.
 
 ## Authentication
 
