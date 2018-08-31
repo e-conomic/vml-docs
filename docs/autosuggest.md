@@ -85,6 +85,13 @@ There is currently no self service way of obtaining a token for use in the autos
 
 ## Uploading Training Data
 
+Some of the Autosuggest endpoints are designed to receive training data in the prediction request - alongside the prediction data, this approach imposes limitations on how large the dataset can be, which again limits how good the predictions can get. In addition it also impacts prediction times, as a lot of effort in the request goes into training on the dataset.
+
+To make our predictions faster and better, we have have devised a solution that allows API integrators to submit datasets in advance, where we then have some systems working behind the scenes to train models on those datasets.
+
+!!! note
+    Not all Autosuggest endpoints currently take advantage of these mechanisms, but over time they will be migrated.
+
 Submitting training data to autosuggest services is done by first creating a dataset and then uploading that dataset to AWS S3.
 The dataset format depends on the service, as each service will make predictions on different kinds of data, but in general the datasets are packed into a binary format called ProtocolBuffers (generally referred to as protobuf).
 
