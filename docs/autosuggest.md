@@ -27,7 +27,7 @@ is to contact [Claus Dahl](mailto:claus.dahl@visma.com) for an access key.
 Assuming we have previously uploaded a dataset called `3124232.pb` (protobuf
 format) to the scanned-invoice API, we can call the API like this:
 
-!! note
+!!! note
     Your customers behave differently and needsindividualized predictions.
     Therefore it is generally recommended to build a dataset per costumer in order
     to have the algorithms learn the correct behaviour of each customer.
