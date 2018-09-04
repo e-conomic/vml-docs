@@ -399,7 +399,7 @@ Combine the endpoint the URL of the [environment](#environments) you want to use
 
 The API is a train-on-call API, meaning that the model first gets trained when a request is received, this has implications on how large datasets are handled as larger datasets generally means longer training time.
 
-Unlike the other train-on-call endpoints, the Scanned Invoice endpoint does not accept the data as a part of the request. Instead the data is expected to be in the dataset bucket on S3, as described above at [Uploading Training Data](#uploading-training-data). When using the endpoint the name of the dataset should be included in the URL.
+Unlike the other train-on-call endpoints, the Scanned Invoice endpoint does not accept the data as a part of the request. Instead the data is expected to be in the dataset bucket on S3, as described above at [Uploading Training Data](#uploading-training-data). When submitting requests the dataset name should be in the URL - currently we allow dataset names to be a path (meaning that it can include slashes), but that is only done to ease migration, ideally a dataset name should not include any slashes.
 
 #### Schemas
 
