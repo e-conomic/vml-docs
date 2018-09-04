@@ -417,6 +417,9 @@ A list of items, used to train on
 - `timestamp`, a datetime in the format `YYYY-MM-DD'T'hh:mm:ss'Z'`
 - `targets`, a map of strings and strings
 
+!!! todo
+    Add protobuf definition or link to it
+
 #### Example Request
 
 Example request:
