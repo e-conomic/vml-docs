@@ -598,8 +598,14 @@ The supplier name model uses pretrained models of known suppliers to suggest how
 The supplier name endpoint is:
 
 ```
-/model/supplier-name/v1/predict
+/model/supplier-name/v1/<region>/predict
 ```
+
+Currently the only allowed regions are:
+
+- `se`
+- `no`
+- `nl`
 
 Combine the endpoint the URL of the [environment](#environments) you want to use to get the full URL.
 
