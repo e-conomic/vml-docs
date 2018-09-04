@@ -140,6 +140,8 @@ To make our predictions faster and better, we have have devised a solution that 
 Submitting training data to autosuggest services is done by first creating a dataset and then uploading that dataset to AWS S3.
 The dataset format depends on the service, as each service will make predictions on different kinds of data, but in general the datasets are packed into a binary format called ProtocolBuffers (generally referred to as protobuf).
 
+If you are new to protobuf check out the official documentation [at Googles site](https://developers.google.com/protocol-buffers/).
+
 When uploading the dataset, there is a S3 bucket defined as well as a path, the bucket is `asgt.dataset.{environment}` and the path is `{user_id}/{autosuggest_service_name}/{dataset_name}`.
 Lets for the sake of an example say we are a small business accounting company called "Bills 'R Us", we have a customer called "Jimmy's Icecream Truck", and we really want to get predictions from the Autosuggest service "Electronic-Invoice-Line", in the "production" environment.
 
