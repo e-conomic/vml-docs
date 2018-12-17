@@ -48,7 +48,7 @@ def run(filepath):
     resp = requests.post(
         url='https://api.stag.ssn.e-conomic.ws/v1alpha1/scan',
         json=data,
-        headers={'Authorization': 'Bearer hello'},
+        headers={'Authorization': 'Bearer YOUR_KEY_HERE'},
     )
     resp.raise_for_status()
     # Pretty print JSON response
