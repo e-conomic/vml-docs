@@ -26,16 +26,21 @@ Copy the code below to a file eg. scan.py and run `python scan.py local_path_to_
 
 ``` python tab="Python"
 import base64
+import json
 
 import requests
 import click
 
+
 @click.command()
 @click.argument('filepath')
 def run(filepath):
+    # Read image
     with open(filepath, 'rb') as file_:
         bytes_ = file_.read()
+    # Base64 encode the image bytes
     document_b64 = base64.b64encode(bytes_)
+    # Prepare request
     data = {
         "features": [{"type": "DOCUMENT_FIELD_DETECTION"}],
         "image": document_b64.decode(),
@@ -46,12 +51,13 @@ def run(filepath):
         headers={'Authorization': 'Bearer hello'},
     )
     resp.raise_for_status()
-    print(resp.json())
+    # Pretty print JSON response
+    print(json.dumps(resp.json(), sort_keys=True, indent=4,
+                     separators=(',', ': ')))
 
 
 if __name__ == '__main__':
     run()
-
 ```
 
 #### Response
