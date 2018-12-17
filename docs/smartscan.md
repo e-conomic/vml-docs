@@ -25,7 +25,6 @@ Before using this code install needed dependencies using
 Copy the code below to a file eg. scan.py and run `python scan.py local_path_to_image`
 
 ``` python tab="Python"
-# Install deps with:
 import base64
 
 import requests
