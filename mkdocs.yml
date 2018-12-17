@@ -1,7 +1,7 @@
 site_name: VML Docs
 nav:
 - Getting Started: index.md
-- Smartscan [wip]: smartscan.md
+- Smartscan: smartscan.md
 - Autosuggest: autosuggest.md
 - Support: support.md
 theme:

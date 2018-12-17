@@ -1,7 +1,7 @@
 # Smartscan <small>for intelligent ERP systems</small>
 
 ## Overview
-Fast and reliable request reply API for scanning invoices and receipts. The apis will work as request / reply, for ease of integration.
+Fast and reliable request/reply API for scanning invoices and receipts.
 
  <!-- - [x] Doctype
  - [x] TotalInclVat -->
@@ -11,36 +11,51 @@ Fast and reliable request reply API for scanning invoices and receipts. The apis
 You can gain valuable time by grayscaling and cropping the images your sent to smartscan in advance.
 This is not a neccesity, but will help and make it a better experience for the end customer. -->
 
-## Http 1
-Example scan calls. Please note we are currently running in ALPHA, so some irregularity is to be expected and responses are to be taken with a grain of salt.
-Below we will provide some simple examples you can use
-### Python example
+## JSON API
+Below you can find example calls for our JSON API. Please note we are currently running in ALPHA, so some irregularity is to be expected and response quality will improve as we work forward towards our production release.
+
+### Python
 The features list in the request data will be expanded in the future and will give more option for extending your response, an example of future functionality is to ask for an extended response containing.
 
+#### Dependencies
+Before using this code install needed dependencies using
+`pip install requests click`
+
+#### Code
+Copy the code below to a file eg. scan.py and run `python scan.py local_path_to_image`
 
 ``` python tab="Python"
+# Install deps with:
 import base64
 
 import requests
+import click
 
-
-def uploadv4(filename):
-    with open(filename, 'rb') as f:
-         b_document = f.read()
-    document_b64 = base64.b64encode(b_document)
+@click.command()
+@click.argument('filepath')
+def run(filepath):
+    with open(filepath, 'rb') as file_:
+        bytes_ = file_.read()
+    document_b64 = base64.b64encode(bytes_)
     data = {
         "features": [{"type": "DOCUMENT_FIELD_DETECTION"}],
-        "image": document_b64
+        "image": document_b64.decode(),
     }
-    upload_resp = requests.post(
-        url=api.stag.ssn.e-conomic.ws,
+    resp = requests.post(
+        url='https://api.stag.ssn.e-conomic.ws/v1alpha1/scan',
         json=data,
-        headers={'Authorization': 'Bearer YOUR_KEY'},
+        headers={'Authorization': 'Bearer hello'},
     )
-    upload_resp.raise_for_status()
-    return upload_resp.json(), upload_resp.headers
+    resp.raise_for_status()
+    print(resp.json())
+
+
+if __name__ == '__main__':
+    run()
+
 ```
 
+#### Response
 You will receive a JSON response containing all predicted fields including a value and a confidence for the field.
 ```json
 {
