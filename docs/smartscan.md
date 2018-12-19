@@ -60,7 +60,51 @@ if __name__ == '__main__':
     run()
 ```
 
-#### Response
+### "C\#"
+
+#### Dependencies
+Before using this code example  you will ned to install the NuGet packages:
+- RestShard
+- Newtonsoft.Json
+
+#### Code
+Copy the code below and replace
+
+```C# tab="C#"
+// Base64 encode image
+byte[] imageArray = System.IO.File.ReadAllBytes(@"PATH_TO_IMAGE_HERE");
+string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+//Create a client and request for calling the API.
+var client = new RestSharp.RestClient("https://api.stag.ssn.e-conomic.ws/v1alpha1");
+var request = new RestSharp.RestRequest("scan", RestSharp.Method.POST);
+//Add you token
+request.AddParameter("Authorization", string.Format("Bearer " + "YOUR_TOKEN_HERE"),
+RestSharp.ParameterType.HttpHeader);
+request.AddJsonBody(new
+{
+    features = new[] { new { type = "DOCUMENT_FIELD_DETECTION"}},
+    image = base64ImageRepresentation
+});
+var response = client.Execute(request);
+
+// On 200 OK, parse the list of SMS IDs else print error
+if ((int)response.StatusCode == 200)
+{
+    var res = Newtonsoft.Json.Linq.JObject.Parse(response.Content);
+    Console.WriteLine(res);
+}
+else if (response.ResponseStatus == RestSharp.ResponseStatus.Completed)
+{
+    Console.WriteLine(response.Content);
+}
+else
+{
+    Console.WriteLine(response.ErrorMessage);
+}
+```
+
+
+### Response
 You will receive a JSON response containing all predicted fields including a value and a confidence for the field.
 ```json
 {
