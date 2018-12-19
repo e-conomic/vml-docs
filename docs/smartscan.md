@@ -12,7 +12,8 @@ You can gain valuable time by grayscaling and cropping the images your sent to s
 This is not a neccesity, but will help and make it a better experience for the end customer. -->
 
 ## JSON API
-Below you can find example calls for our JSON API. Please note we are currently running in ALPHA, so some irregularity is to be expected and response quality will improve as we work forward towards our production release. The features list in the request data will be expanded in the future and will give you options for what information you would like to have returned as part of your response.
+The new smartscan REST API,  to use the API you will need a token, you can apply for a token to the API by contacting us.
+Please note that until further notice we are running in ALPHA, so some irregularity is to be expected and response quality will improve as we work towards our production release.
 
 ```json
 POST /v1alpha1/scan HTTP/1.1
@@ -129,7 +130,6 @@ Before using this code example  you will ned to install the NuGet packages:
 - Newtonsoft.Json
 
 ##### Code
-Copy the code below and replace
 
 ```csharp
 // Base64 encode image
