@@ -7,7 +7,7 @@ Fast and reliable request/reply API for scanning invoices and receipts.
 The new smartscan REST API,  to use the API you will need a token, you can request a token to the API by contacting us on our [support email](mailto:vmlsupport@e-conomic.com).
 
 All of our APIs are document in protobuf files that you can find [here](https://github.com/e-conomic/vmlapis/tree/master/ssn).
-The top level API is (here) https://github.com/e-conomic/vmlapis/blob/master/ssn/scanner/v1/scanner.proto - but he example below should get you going.
+The top level API is [here](https://github.com/e-conomic/vmlapis/blob/master/ssn/scanner/v1/scanner.proto) - but the example below should get you going.
 At the moment two types of output are available - the documentFieldDetection - which you're probably mostly interested in, but also rawTextDetection,
 which is essential input if you're integrating SmartScan with AutoSuggest account predictions.
 
