@@ -3,20 +3,13 @@
 ## Overview
 Fast and reliable request/reply API for scanning invoices and receipts.
 
- <!-- - [x] Doctype
- - [x] TotalInclVat -->
-
-
-<!-- ## Pro tips
-You can gain valuable time by grayscaling and cropping the images your sent to smartscan in advance.
-This is not a neccesity, but will help and make it a better experience for the end customer. -->
-
 ## JSON API
-The new smartscan REST API,  to use the API you will need a token, you can apply for a token to the API by contacting us.
-Please note that until further notice we are running in ALPHA, so some irregularity is to be expected and response quality will improve as we work towards our production release.
+The new smartscan REST API,  to use the API you will need a token, you can request a token to the API by contacting us on our [support email](mailto:vmlsupport@e-conomic.com).
+
+All accepted input and potential output is defined by our[protobuf definition](https://github.com/e-conomic/proto/blob/master/ssn/mlservice/v1/mlservice.proto) comments in the protobuf will contain information on fields that have unique traits.
 
 ```json
-POST /v1alpha1/scan HTTP/1.1
+POST /v1/scan HTTP/1.1
 Authorization: Bearer secret-access-token
 
 {
@@ -35,7 +28,7 @@ Content-Type: application/json
   "documentFieldDetection": {
     "currency": {
       "confidence": 0.99999547,
-      "value": "EUR"
+      "value": "SEK"
     },
     "documentType": {
       "confidence": 0.9999604,
@@ -49,15 +42,23 @@ Content-Type: application/json
       "confidence": 0.63128847,
       "value": "2017-03-17"
     },
+    "paymentDueDate": {
+      "confidence": 0.63128847,
+      "value": "2017-04-01"
+    },
     "supplierCorporateId": [
       {
         "confidence": 0.96503794,
         "value": "1234567"
-      }
+      },
+      {
+        "confidence": 0.91503794,
+        "value": "7654321"
+      },
     ],
     "supplierCountryCode": {
       "confidence": 0.99994624,
-      "value": "FI"
+      "value": "SE"
     },
     "totalInclVat": {
       "confidence": 0.99762625,
@@ -66,10 +67,36 @@ Content-Type: application/json
     "totalVat": {
       "confidence": 0.5977386,
       "value": "31.56"
+    },
+    "totalExclVat": {
+      "confidence": 0.5977386,
+      "value": "111.5"
+    },
+    "ocrLineFi": {
+      "paymentId": {
+        "confidence": 0.55,
+        "value": "117030351"
+      },
+      "bankgiroCreditorId": {
+        "confidence": 0.87,
+        "value": "52113222"
+      },
+      "plusgiroCreditorId": {
+        "confidence": 0.87,
+        "value": "3874807"
+      }
     }
   }
 }
 ```
+
+### Endpoints
+Our endpoints for Smartscan will be
+
+- Staging: https://api.stag.ssn.e-conomic.ws/v1
+- Production: https://api.prod.ssn.e-conomic.ws/v1
+
+Where ssn is short for Smartscan.
 
 ### Code examples
 Below will be some lightweight examples in various programming languages, that can
@@ -108,7 +135,7 @@ def run(filepath):
         "image": document_b64.decode(),
     }
     resp = requests.post(
-        url='https://api.stag.ssn.e-conomic.ws/v1alpha1/scan',
+        url='https://api.stag.ssn.e-conomic.ws/v1/scan',
         json=data,
         headers={'Authorization': 'Bearer YOUR_TOKEN_HERE'},
     )
@@ -126,7 +153,7 @@ if __name__ == '__main__':
 
 ##### Dependencies
 Before using this code example  you will ned to install the NuGet packages:
-- RestShard
+- RestSharp
 - Newtonsoft.Json
 
 ##### Code
@@ -137,7 +164,7 @@ byte[] imageArray = System.IO.File.ReadAllBytes(@"PATH_TO_IMAGE_HERE");
 string base64ImageRepresentation = Convert.ToBase64String(imageArray);
 
 //Create a client and request for calling the API.
-var client = new RestSharp.RestClient("https://api.stag.ssn.e-conomic.ws/v1alpha1");
+var client = new RestSharp.RestClient("https://api.stag.ssn.e-conomic.ws/v1");
 var request = new RestSharp.RestRequest("scan", RestSharp.Method.POST);
 
 //Add your token
@@ -176,7 +203,7 @@ else
 $im = file_get_contents('PATH_TO_IMAGE_HERE');
 $imdata = base64_encode($im);
 $features = ["DOCUMENT_FIELD_DETECTION"];
-$url = "https://api.stag.ssn.e-conomic.ws/v1alpha1/scan";
+$url = "https://api.stag.ssn.e-conomic.ws/v1/scan";
 $json = [
     'features' => [],
     'image' => $imdata
