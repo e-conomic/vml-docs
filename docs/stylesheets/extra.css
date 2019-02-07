@@ -1,0 +1,12 @@
+.md-footer-copyright {
+    display: none;
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+}
+
+.md-nav--secondary .md-nav__list .md-nav__list .md-nav__list {
+    display: none
+}

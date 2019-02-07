@@ -1,0 +1,66 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vml-docs
+  namespace: asgt
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 10%
+      maxSurge: 50%
+  template:
+    metadata:
+      labels:
+        app: vml-docs
+    spec:
+      containers:
+      - name: vml-docs
+        image: "quay.io/economic/vml-docs"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: 256M
+        # env:
+        # - name: DEPLOY_TIME
+        #   value: "\"${ execution['startTime'] }\""
+      imagePullSecrets:
+      - name: economic-vml-ro-pull-secret
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: vml-docs
+  namespace: asgt
+spec:
+  selector:
+    app: vml-docs
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vml-docs
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    ingress.kubernetes.io/configuration-snippet: |
+      rewrite ^(/docs)$ $1/ permanent;
+  namespace: asgt
+spec:
+  rules:
+  - host: docs.ml.e-conomic.ws
+    http:
+      paths:
+      - backend:
+          serviceName: vml-docs
+          servicePort: 80

@@ -1,0 +1,26 @@
+site_name: VML Docs
+nav:
+- Getting Started: index.md
+- Smartscan: smartscan.md
+- Autosuggest: autosuggest.md
+- Support: support.md
+theme:
+  name: 'material'
+  custom_dir: 'theme'
+  palette:
+    primary: 'teal'
+    accent: 'teal'
+  feature:
+    tabs: false
+
+markdown_extensions:
+- codehilite
+- toc:
+    permalink: true
+- admonition
+- pymdownx.superfences
+- pymdownx.tasklist
+- markdown.extensions.attr_list:
+
+extra_css:
+- stylesheets/extra.css
