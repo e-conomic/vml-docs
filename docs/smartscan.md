@@ -104,10 +104,10 @@ Content-Type: application/json
 - pdf
 
 ### Endpoints
-Our endpoints for Smartscan will be
+Smartscan endpoints are located at
 
-- Staging: https://api.stag.ssn.e-conomic.ws/v1
-- Production: https://api.prod.ssn.e-conomic.ws/v1
+- Staging: https://api.stag.ssn.e-conomic.ws
+- Production: https://api.prod.ssn.e-conomic.ws
 
 Where ssn is short for Smartscan.
 
