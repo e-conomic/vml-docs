@@ -106,8 +106,8 @@ Content-Type: application/json
 ### Endpoints
 Smartscan endpoints are located at
 
-- Staging: https://api.stag.ssn.e-conomic.ws
-- Production: https://api.prod.ssn.e-conomic.ws
+- Staging: https://api.stag.ssn.visma.ai
+- Production: https://api.prod.ssn.visma.ai
 
 Where ssn is short for Smartscan.
 
@@ -148,7 +148,7 @@ def run(filepath):
         "image": document_b64.decode(),
     }
     resp = requests.post(
-        url='https://api.stag.ssn.e-conomic.ws/v1/scan',
+        url='https://api.stag.ssn.visma.ai/v1/scan',
         json=data,
         headers={'Authorization': 'Bearer YOUR_TOKEN_HERE'},
     )
@@ -177,7 +177,7 @@ byte[] imageArray = System.IO.File.ReadAllBytes(@"PATH_TO_IMAGE_HERE");
 string base64ImageRepresentation = Convert.ToBase64String(imageArray);
 
 //Create a client and request for calling the API.
-var client = new RestSharp.RestClient("https://api.stag.ssn.e-conomic.ws/v1");
+var client = new RestSharp.RestClient("https://api.stag.ssn.visma.ai/v1");
 var request = new RestSharp.RestRequest("scan", RestSharp.Method.POST);
 
 //Add your token
@@ -216,7 +216,7 @@ else
 $im = file_get_contents('PATH_TO_IMAGE_HERE');
 $imdata = base64_encode($im);
 $features = ["DOCUMENT_FIELD_DETECTION"];
-$url = "https://api.stag.ssn.e-conomic.ws/v1/scan";
+$url = "https://api.stag.ssn.visma.ai/v1/scan";
 $json = [
     'features' => [],
     'image' => $imdata

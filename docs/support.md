@@ -6,4 +6,4 @@ If you have questions that our documentation does not have answers for, or if yo
 
 ## Slack
 
-We are also on the #team-vml room in the e-conomic slack, so if you have access there we are generally available for quick questions.
+We are also on the #smb-vml-support room in the visma slack, so if you have access there, we are generally available for quick questions.
