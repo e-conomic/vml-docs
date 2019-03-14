@@ -4,9 +4,7 @@
 Fast and reliable request/reply API for scanning invoices and receipts.
 
 ## JSON API
-The new smartscan REST API,  to use the API you will need a token, you can request a token to the API by contacting us on our [support email](mailto:vmlsupport@e-conomic.com).
-
-All of our APIs are documented in protobuf files that you can find [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn).
+The API is documented in our protobuf files that you can find [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn).
 The top level API is [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn/scanner/v1/scanner.proto) - but the example below should get you going.
 At the moment two types of output are available - the documentFieldDetection - which you're probably mostly interested in, but also rawTextDetection,
 which is essential input if you're integrating SmartScan with AutoSuggest account predictions.
@@ -14,6 +12,30 @@ which is essential input if you're integrating SmartScan with AutoSuggest accoun
 You can find all available output fields [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn/mlservice/v1/mlservice.proto).
 Comments in the protobuf will contain information on fields that have unique traits.
 
+### Requesting access
+To get access to the API contact us on [Slack](https://visma.slack.com/messages/CG5LXV5ST) or on our [support email](mailto:vmlsupport@e-conomic.com)
+
+### Authentication
+Authentication is done using a bearer token, set it in the Authorization header as follows.
+
+```http
+Authorization: Bearer Token
+```
+
+### Rate limiting
+All users of the API will be limited to *180* requests per rolling minute and is enforced on a per token level a portion of
+these requests are for bursts of traffic.
+
+Every API response will return the following rate limit headers
+
+`x-ratelimit-limit`: The number of burst requests the current API token can perform.
+
+`x-ratelimit-remaining`: The number of burst requests left.
+
+`x-ratelimit-reset`: If you have been ratelimited based on the above headers, this indicates how many seconds until you are allowed to send traffic again.
+
+
+### Example request
 When using the API please note that, an image is a file of type `jpg`, `png` or `pdf`. Multi page PDFs are treated as a single image.
 
 ```json
@@ -80,7 +102,7 @@ Content-Type: application/json
       "confidence": 0.5977386,
       "value": "111.5"
     },
-    "ocrLineFi": {
+    "ocrLineSe": {
       "paymentId": {
         "confidence": 0.55,
         "value": "117030351"
@@ -106,10 +128,8 @@ Content-Type: application/json
 ### Endpoints
 Smartscan endpoints are located at
 
-- Staging: https://api.stag.ssn.visma.ai
-- Production: https://api.prod.ssn.visma.ai
-
-Where ssn is short for Smartscan.
+- Staging: `https://api.stag.ssn.visma.ai`
+- Production: `https://api.prod.ssn.visma.ai`
 
 ### Code examples
 Below will be some lightweight examples in various programming languages, that can
