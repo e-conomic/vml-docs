@@ -34,6 +34,8 @@ Every API response will return the following rate limit headers
 
 `x-ratelimit-reset`: If you have been ratelimited based on the above headers, this indicates how many seconds until you are allowed to send traffic again.
 
+### Confidences
+Confidences are provided for debugging purposes, and should not be used for hard-coded thresholding. The values will fluctuate with small changes in our internal machine learning models, and are not stable over time or across fields.
 
 ### Example request
 When using the API please note that, an image is a file of type `jpg`, `png` or `pdf`. Multi page PDFs are treated as a single image.
