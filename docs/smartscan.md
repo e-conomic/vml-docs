@@ -32,7 +32,9 @@ Every API response will return the following rate limit headers
 
 `x-ratelimit-remaining`: The number of burst requests left.
 
-`x-ratelimit-reset`: If you have been ratelimited based on the above headers, this indicates how many seconds until you are allowed to send traffic again.
+`retry-after`: If you have been ratelimited based on the above headers, this indicates how many seconds until you are allowed to send traffic again. and always -1 if the action was allowed
+
+`x-ratelimit-reset`: The number of seconds until the limit will reset to its maximum capacity
 
 
 ### Example request
