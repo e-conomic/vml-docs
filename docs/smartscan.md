@@ -312,7 +312,8 @@ x-ratelimit-reset: 0
     ]
 }
 ```
-
+# Results
+Results for each field is returned sorted by their confidence level going from the most confident to the least confident.
 
 
 ### Code examples
