@@ -1,19 +1,23 @@
-# Smartscan <small>for intelligent ERP systems</small>
+# Document annotator <small>for intelligent ERP systems</small>
 
 ## Overview
 Fast and reliable request/reply API for scanning invoices and receipts.
 
-## JSON API
+## API
 The API is documented in our protobuf files that you can find [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn).
-The top level API is [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn/scanner/v1/scanner.proto) - but the example below should get you going.
-At the moment two types of output are available - the documentFieldDetection - which you're probably mostly interested in, but also rawTextDetection,
-which is essential input if you're integrating SmartScan with AutoSuggest account predictions.
+The top level API is [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn/annotator/v1/annotator.proto) - but the example below should get you going.
 
-You can find all available output fields [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn/mlservice/v1/mlservice.proto).
+You can find all available output fields [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn/annotator/v1/annotator.proto#L85-L169).
 Comments in the protobuf will contain information on fields that have unique traits.
 
 ### Requesting access
 To get access to the API contact us on [Slack](https://visma.slack.com/messages/CG5LXV5ST) or on our [support email](mailto:vmlsupport@e-conomic.com)
+
+### Endpoints
+Annotator endpoints are located at
+
+- Staging: `https://api.stag.ssn.visma.ai/document:annotate`
+- Production: `https://api.prod.ssn.visma.ai/document:annotate`
 
 ### Authentication
 Authentication is done using a bearer token, set it in the Authorization header as follows.
@@ -36,110 +40,295 @@ Every API response will return the following rate limit headers
 
 `x-ratelimit-reset`: The number of seconds until the limit will reset to its maximum capacity
 
-### Confidences
-Confidences are provided for debugging purposes, and should not be used for hard-coded thresholding. The values will fluctuate with small changes in our internal machine learning models, and are not stable over time or across fields.
-
-### Example request
-When using the API please note that, an image is a file of type `jpg`, `png` or `pdf`. Multi page PDFs are treated as a single image.
+### Document data sources
+The caller can choose either to send the document data as part of the request.
+key field`content` is the document data base64 encoded.
 
 ```json
-POST /v1/scan HTTP/1.1
-Authorization: Bearer secret-access-token
-
 {
-  "features": [
-      {
-        "type": "DOCUMENT_FIELD_DETECTION"
-      }
-  ],
-  "image": "/9j/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCw"
-}
-
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-  "documentFieldDetection": {
-    "currency": {
-      "confidence": 0.99999547,
-      "value": "SEK"
+    "document": {
+        "content": "Vl00oANHjF3gxaYT4fQ0PSDJwwZIuMLl0GdNlgyKhF4KYOtcH3r..."  
     },
-    "documentType": {
-      "confidence": 0.9999604,
-      "value": "Invoice"
-    },
-    "invoiceNumber": {
-      "confidence": 0.55902606,
-      "value": "11703035"
-    },
-    "orderDate": {
-      "confidence": 0.63128847,
-      "value": "2017-03-17"
-    },
-    "paymentDueDate": {
-      "confidence": 0.63128847,
-      "value": "2017-04-01"
-    },
-    "supplierCorporateId": [
-      {
-        "confidence": 0.96503794,
-        "value": "1234567"
-      },
-      {
-        "confidence": 0.91503794,
-        "value": "7654321"
-      },
-    ],
-    "supplierCountryCode": {
-      "confidence": 0.99994624,
-      "value": "SE"
-    },
-    "totalInclVat": {
-      "confidence": 0.99762625,
-      "value": "163.06"
-    },
-    "totalVat": {
-      "confidence": 0.5977386,
-      "value": "31.56"
-    },
-    "totalExclVat": {
-      "confidence": 0.5977386,
-      "value": "111.5"
-    },
-    "ocrLineSe": {
-      "paymentId": {
-        "confidence": 0.55,
-        "value": "117030351"
-      },
-      "bankgiroCreditorId": {
-        "confidence": 0.87,
-        "value": "52113222"
-      },
-      "plusgiroCreditorId": {
-        "confidence": 0.87,
-        "value": "3874807"
-      }
-    }
-  }
+    "features": [{"type": "DEFAULT"}]
 }
 ```
 
-### Supported file types
-- png
-- jpg
-- pdf
+there is also the option to send an url to the api and the service will fetch and process the docuement
 
-### Endpoints
-Smartscan endpoints are located at
 
-- Staging: `https://api.stag.ssn.visma.ai`
-- Production: `https://api.prod.ssn.visma.ai`
+```json
+{
+    "document": {
+        "source": {
+            "httpUri": "https://mydata.amazonaws.com/bucket/image.png?AWSAccessKeyId=AKIAJLABBAD5ID&Signature=uC5ezkV%2B%2F76Dy0mp2vH85QojB0E%3D&Expires=1456878852"
+        }
+    },
+    "features": [{"type": "DEFAULT"}]
+}
+```
+
+### Confidence Levels
+Allowed values for confidence level is
+```
+VERY_HIGH, HIGH, MID, LOW, VERY_LOW
+```
+
+### Features
+
+The caller can specify which prediction operations he wants the api to perform. The full list of features are
+
+```
+ORDER_DATE
+PAYMENT_DUE_DATE
+CURRENCY
+TOTAL_VAT
+TOTAL_INCL_VAT
+TOTAL_EXCL_VAT
+SUPPLIER_CORPORATE_ID
+SUPPLIER_COUNTRY_CODE
+DOCUMENT_TYPE
+PAYMENT_METHOD
+CREDIT_CARD_LAST_FOUR
+INVOICE_NUMBER
+OCR_LINE_DK_TYPE
+OCR_LINE_DK_PAYMENT_ID
+OCR_LINE_DK_CREDITOR_ID
+OCR_LINE_SE_PAYMENT_ID
+OCR_LINE_SE_BANKGIRO_CREDITOR_ID
+OCR_LINE_SE_PLUSGIRO_CREDITOR_ID
+OCR_LINE_NO_PAYMENT_ID
+OCR_LINE_FI_PAYMENT_ID
+OCR_LINE_NL_PAYMENT_ID
+TEXT
+DEFAULT
+```
+
+The `DEFAULT` feature includes the following fields
+
+```
+ORDER_DATE
+PAYMENT_DUE_DATE
+CURRENCY
+TOTAL_VAT
+TOTAL_INCL_VAT
+TOTAL_EXCL_VAT
+SUPPLIER_CORPORATE_ID
+SUPPLIER_COUNTRY_CODE
+DOCUMENT_TYPE
+PAYMENT_METHOD
+CREDIT_CARD_LAST_FOUR
+INVOICE_NUMBER
+```
+
+For each feature the caller can set `maxResults` (defaults to 1) and `minConfidence` (defaults to `HIGH`).
+If both `DEFAULT` and a specific feature is set, the specific feautre will take precedence.
+
+See the example below.
+
+### Example request
+
+```json
+POST /v1/document:annotate HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Authorization: Bearer *************************** 
+Connection: keep-alive
+Content-Length: 272
+Content-Type: application/json
+Host: api.prod.ssn.visma.ai
+User-Agent: HTTPie/0.9.9
+
+{
+    "document": {
+        "source": {
+            "httpUri": "http://examplehost.com/testing-document.pdf"
+        }
+    },
+    "features": [
+        {"type": "DEFAULT"},
+        {"type": "CURRENCY", "maxResults": 2, "minConfidence": "VERY_LOW"},
+        {"type": "TEXT"}
+    ]
+}
+
+HTTP/1.1 200 OK
+content-type: application/json
+date: Fri, 03 May 2019 08:53:53 GMT
+grpc-metadata-content-type: application/grpc
+retry-after: -1
+server: envoy
+transfer-encoding: chunked
+x-envoy-upstream-service-time: 444
+x-ratelimit-limit: 46
+x-ratelimit-remaining: 45
+x-ratelimit-reset: 0
+
+{
+    "currency": [
+        {
+            "confidence": {
+                "level": "VERY_HIGH"
+            },
+            "value": "DKK"
+        },
+        {
+            "confidence": {
+                "level": "VERY_LOW"
+            },
+            "value": "SEK"
+        }
+    ],
+    "documentType": [
+        {
+            "confidence": {
+                "level": "VERY_HIGH"
+            },
+            "value": "Invoice"
+        }
+    ],
+    "invoiceNumber": [
+        {
+            "boundingBox": {
+                "normalizedVertices": [
+                    {"x": 0.4180645, "y": 0.1504109},
+                    {"x": 0.4633548, "y": 0.1504109},
+                    {"x": 0.4633548, "y": 0.1619178 },
+                    {"x": 0.4180645, "y": 0.1619178 }
+                ],
+                "vertices": [
+                    {"x": 518, "y": 263},
+                    {"x": 574, "y": 263},
+                    {"x": 574, "y": 283},
+                    {"x": 518, "y": 283}
+                ]
+            },
+            "confidence": {
+                "level": "VERY_HIGH"
+            },
+            "text": "368254",
+            "value": "368254"
+        }
+    ],
+    "supplierCorporateId": [
+        {
+            "boundingBox": {
+                "normalizedVertices": [
+                    {"x": 0.13277419, "y": 0.4471233},
+                    {"x": 0.16722581, "y": 0.4471233},
+                    {"x": 0.16722581, "y": 0.4534246},
+                    {"x": 0.13277419, "y": 0.4534246}
+                ],
+                "vert`ices": [
+                    {"x": 207, "y": 783},
+                    {"x": 164, "y": 783},
+                    {"x": 207, "y": 794},
+                    {"x": 164, "y": 794}
+                ]
+            },
+            "confidence": {
+                "level": "VERY_HIGH"
+            },
+            "text": "70986310",
+            "value": "70986310"
+        }
+    ],
+    "supplierCountryCode": [
+        {
+            "confidence": {
+                "level": "VERY_HIGH"
+            },
+            "value": "DK"
+        }
+    ],
+    "text": "PRINTER\nPATRONER.DK\nClaus Dahl\nAbel Cathrinesgade 6 4.th.\n1654 København V\nDanmark\nAtt.: Claus Dahl\nMaigårdsvej 4\n9900 Frederikshavn\nTlf: 98 48 06 77\nFAKTURA\nFaktura\nDato ...\nSide ...........\nKonto\n101526\n13/07-16\nINTERNET\n368254\nOrdrenummer ...:\nMomsnummer ...:\nFaktura betalt med Dankort\nSælger ............: Lars Lund\nRekvisition .........\nFølg din pakke via Track & Trace ved at klikke på dette link:\nhttp://logistics.postennorden.com/wsp/widgets/ntt-widget/tt-post-DK-da.htm?id=e43d49af-0025-060b-7059-4194-a3bf-1b3aa4663508-831847036082\nVarenummer Tekst\nAntal\nenhed\nBeløb\nDKK\nPris\n1,00\nHPCN053AE Blækpatron sort No.932XL HP Original\nHPCN054AE Blækpatron cyan No.933XL HP Original\nHP CN055AE Blækpatron mag No.933XL HP Original\nHPCN056AE Blækpatron yel No.933XL HP Original\n1,00\n1,00\n1,00\n226,00\n107,00\n107,00\n107,00\n226,00\n107,00\n107,00\n107,00\nForsendelse ........:\n31,00\nTotal excl. moms\n462,40\nMoms\n25,00%\nMomsbeløb\n115,60\nTotal beløb DKK\n578,00\nE-Mail: kundeservice@printerpatroner.dk - www.printerpatroner.dk\nCVR: 70986310 - Bank: Nordjyske Bank - Konto nr.: 8090 0001066391\n",
+    "totalExclVat": [
+        {
+            "boundingBox": {
+                "normalizedVertices": [
+                    {"x": 0.21870968, "y": 0.42821917},
+                    {"x": 0.24154839, "y": 0.42821917},
+                    {"x": 0.24154839, "y": 0.43315068},
+                    {"x": 0.21870968, "y": 0.43315068}
+                ],
+                "vertices": [
+                    {"x": 271, "y": 750},
+                    {"x": 299, "y": 750},
+                    {"x": 299, "y": 758},
+                    {"x": 271, "y": 758}
+                ]
+            },
+            "confidence": {
+                "level": "HIGH"
+            },
+            "text": "462,40",
+            "value": "462.40"
+        }
+    ],
+    "totalInclVat": [
+        {
+            "boundingBox": {
+                "normalizedVertices": [
+                    {"x": 0.44090322, "y": 0.4279452},
+                    {"x": 0.46219355, "y": 0.4279452},
+                    {"x": 0.46219355, "y": 0.4336986},
+                    {"x": 0.44090322, "y": 0.4336986}
+                ],
+                "vertices": [
+                    {"x": 546, "y": 749},
+                    {"x": 573, "y": 749},
+                    {"x": 573, "y": 759},
+                    {"x": 546, "y": 759}
+                ]
+            },
+            "confidence": {
+                "level": "VERY_HIGH"
+            },
+            "text": "578,00",
+            "value": "578.00"
+        }
+    ],
+    "totalVat": [
+        {
+            "boundingBox": {
+                "normalizedVertices": [
+                    {"x": 0.3410322, "y": 0.42849314},
+                    {"x": 0.3619355, "y": 0.42849314},
+                    {"x": 0.3619355, "y": 0.43342465},
+                    {"x": 0.3410322, "y": 0.43342465}
+                ],
+                "vertices": [
+                    {"x": 422, "y": 750},
+                    {"x": 448, "y": 750},
+                    {"x": 448, "y": 759},
+                    {"x": 422, "y": 759}
+                ]
+            },
+            "confidence": {
+                "level": "HIGH"
+            },
+            "text": "115,60",
+            "value": "115.60"
+        }
+    ]
+}
+```
+
+
 
 ### Code examples
 Below will be some lightweight examples in various programming languages, that can
 give you a headstart for trying out and getting a feel for the new smartscan API.
 The examples can be copy pasted, and all you will have to do is replace the YOUR_TOKEN_HERE
 and provide a path to a document you would like scanned.
+
+### Supported file types
+- png
+- jpg
+- pdf
+- gif
+- tif
+- bmp
+
 
 #### Python
 
@@ -168,11 +357,11 @@ def run(filepath):
     document_b64 = base64.b64encode(bytes_)
     # Prepare request
     data = {
-        "features": [{"type": "DOCUMENT_FIELD_DETECTION"}],
-        "image": document_b64.decode(),
+        "features": [{"type": "DEFAULT"}],
+        "document": {"content": document_b64.decode()},
     }
     resp = requests.post(
-        url='https://api.stag.ssn.visma.ai/v1/scan',
+        url='https://api.stag.ssn.visma.ai/v1/document:annotate',
         json=data,
         headers={'Authorization': 'Bearer YOUR_TOKEN_HERE'},
     )
@@ -202,15 +391,15 @@ string base64ImageRepresentation = Convert.ToBase64String(imageArray);
 
 //Create a client and request for calling the API.
 var client = new RestSharp.RestClient("https://api.stag.ssn.visma.ai/v1");
-var request = new RestSharp.RestRequest("scan", RestSharp.Method.POST);
+var request = new RestSharp.RestRequest("document:annotate", RestSharp.Method.POST);
 
 //Add your token
 request.AddParameter("Authorization", string.Format("Bearer " + "YOUR_TOKEN_HERE"),
 RestSharp.ParameterType.HttpHeader);
 request.AddJsonBody(new
 {
-    features = new[] { new { type = "DOCUMENT_FIELD_DETECTION"}},
-    image = base64ImageRepresentation
+    features = new[] { new { type = "DEFAULT"}},
+    document = new { content = base64ImageRepresentation}
 });
 var response = client.Execute(request);
 
@@ -228,33 +417,4 @@ else
 {
     Console.WriteLine(response.ErrorMessage);
 }
-```
-
-
-#### PHP
-
-##### Code
-```PHP
-<?php
-// Define recipients
-$im = file_get_contents('PATH_TO_IMAGE_HERE');
-$imdata = base64_encode($im);
-$features = ["DOCUMENT_FIELD_DETECTION"];
-$url = "https://api.stag.ssn.visma.ai/v1/scan";
-$json = [
-    'features' => [],
-    'image' => $imdata
-];
-foreach ($features as $feature) {
-    $json['features'][] = ['type' => $feature];}
-
-$ch = curl_init();
-curl_setopt($ch,CURLOPT_URL, $url);
-curl_setopt($ch,CURLOPT_HTTPHEADER, array("Authorization: Bearer YOUR_TOKEN_HERE"));
-curl_setopt($ch,CURLOPT_POSTFIELDS, json_encode($json));
-curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-$result = curl_exec($ch);
-curl_close($ch);
-$json = json_decode($result);
-print_r($json);
 ```
