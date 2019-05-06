@@ -47,13 +47,13 @@ key field`content` is the document data base64 encoded.
 ```json
 {
     "document": {
-        "content": "Vl00oANHjF3gxaYT4fQ0PSDJwwZIuMLl0GdNlgyKhF4KYOtcH3r..."  
+        "content": "Vl00oANHjF3gxaYT4fQ0PSDJwwZIuMLl0GdNlgyKhF4KYOtcH3r..."
     },
     "features": [{"type": "DEFAULT"}]
 }
 ```
 
-there is also the option to send an url to the api and the service will fetch and process the docuement
+there is also the option to send an url to the api and the service will fetch and process the document
 
 
 ```json
@@ -131,7 +131,7 @@ See the example below.
 POST /v1/document:annotate HTTP/1.1
 Accept: application/json, */*
 Accept-Encoding: gzip, deflate
-Authorization: Bearer *************************** 
+Authorization: Bearer ***************************
 Connection: keep-alive
 Content-Length: 272
 Content-Type: application/json
