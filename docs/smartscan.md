@@ -16,8 +16,8 @@ To get access to the API contact us on [Slack](https://visma.slack.com/messages/
 ### Endpoints
 Annotator endpoints are located at
 
-- Staging: `https://api.stag.ssn.visma.ai/document:annotate`
-- Production: `https://api.prod.ssn.visma.ai/document:annotate`
+- Staging: `https://api.stag.ssn.visma.ai/v1/document:annotate`
+- Production: `https://api.prod.ssn.visma.ai/v1/document:annotate`
 
 ### Authentication
 Authentication is done using a bearer token, set it in the Authorization header as follows.
