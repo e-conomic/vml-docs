@@ -378,44 +378,42 @@ if __name__ == '__main__':
 
 #### "C\#"
 
-##### Dependencies
-Before using this code example  you will ned to install the NuGet packages:
-- RestSharp
-- Newtonsoft.Json
-
-##### Code
-
 ```csharp
-// Base64 encode image
-byte[] imageArray = System.IO.File.ReadAllBytes(@"PATH_TO_IMAGE_HERE");
-string base64ImageRepresentation = Convert.ToBase64String(imageArray);
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json;
 
-//Create a client and request for calling the API.
-var client = new RestSharp.RestClient("https://api.stag.ssn.visma.ai/v1");
-var request = new RestSharp.RestRequest("document:annotate", RestSharp.Method.POST);
+namespace SmartScanTest
+{
+    class Program
+    {
+        public static void Main(string[] args)
+        {
+            string apiKey = "your api key";
+            string urlToPdf = "url to pdf here";
+            string endpointAddress = "https://api.stag.ssn.visma.ai/v1/document:annotate";
 
-//Add your token
-request.AddParameter("Authorization", string.Format("Bearer " + "YOUR_TOKEN_HERE"),
-RestSharp.ParameterType.HttpHeader);
-request.AddJsonBody(new
-{
-    features = new[] { new { type = "DEFAULT"}},
-    document = new { content = base64ImageRepresentation}
-});
-var response = client.Execute(request);
+            dynamic scanRequest = new
+            {
+                features = new[] { new { type = "DEFAULT" } },
+                document = new { source = new { httpUri = urlToPdf } }
+            };
 
-// On 200 OK, parse the response content.
-if ((int)response.StatusCode == 200)
-{
-    var res = Newtonsoft.Json.Linq.JObject.Parse(response.Content);
-    Console.WriteLine(res);
+            var json = JsonConvert.SerializeObject(scanRequest);
+            var requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+
+            var result = client.PostAsync(new Uri(endpointAddress), requestContent);
+            result.Wait();
+
+            Console.WriteLine(result.Result);
+            Console.ReadLine();
+        }
+    }
 }
-else if (response.ResponseStatus == RestSharp.ResponseStatus.Completed)
-{
-    Console.WriteLine(response.Content);
-}
-else
-{
-    Console.WriteLine(response.ErrorMessage);
-}
+
 ```
