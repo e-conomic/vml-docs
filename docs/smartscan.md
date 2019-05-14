@@ -312,8 +312,10 @@ x-ratelimit-reset: 0
     ]
 }
 ```
-# Results
+### Results
 Results for each field is returned sorted by their confidence level going from the most confident to the least confident.
+#### Additional info on credit card last four-
+At the moment the credit_card_last_four feature does not have boundary boxes as we do not have data to train for this feature, predictions for this features is therefore solved in a different manner, first priority was to be able to predict the field, secondly we will find a way to add boundary boxes.
 
 
 ### Code examples
