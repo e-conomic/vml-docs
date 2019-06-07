@@ -27,8 +27,8 @@ Authorization: Bearer Token
 ```
 
 ### Rate limiting
-All users of the API will be limited to *200* requests per rolling minute. This is enforced on a per token level. A portion of
-the 200 requests are for bursts of traffic. 
+All users of the API will be limited to *300* requests per rolling minute. This is enforced on a per token level. A portion of
+the 300 requests are for bursts of traffic. 
 
 Every API response will return the following rate limit headers
 
