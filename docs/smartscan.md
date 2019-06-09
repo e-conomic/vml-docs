@@ -10,6 +10,8 @@ The top level API is [here](https://github.com/e-conomic/vmlapis/blob/master/pro
 You can find all available output fields [here](https://github.com/e-conomic/vmlapis/blob/master/proto/ssn/annotator/v1/annotator.proto#L85-L169).
 Comments in the protobuf will contain information on fields that have unique traits.
 
+The max request size is 10485760 Bytes (10Mb). Requests bigger than the max request size will result in a 413 response.
+
 ### Requesting access
 To get access to the API contact us on [Slack](https://visma.slack.com/messages/CG5LXV5ST) or on our [support email](mailto:vmlsupport@e-conomic.com)
 
