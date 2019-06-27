@@ -13,7 +13,9 @@ Comments in the protobuf will contain information on fields that have unique tra
 The max request size is 10485760 Bytes (10Mb). Requests bigger than the max request size will result in a 413 response.
 
 ### Requesting access
-To get access to the API contact us on [Slack](https://visma.slack.com/messages/CG5LXV5ST) or on our [support email](mailto:vmlsupport@e-conomic.com)
+To get started quickly you can use "demo" as an API token. It's heavily rate limited, but fine for development purposes. Do not use it in production!
+
+To get real access to the API contact us on [Slack](https://visma.slack.com/messages/CG5LXV5ST) or on our [support email](mailto:vmlsupport@e-conomic.com)
 
 ### Endpoints
 Annotator endpoints are located at
@@ -21,12 +23,52 @@ Annotator endpoints are located at
 - Staging: `https://api.stag.ssn.visma.ai/v1/document:annotate`
 - Production: `https://api.prod.ssn.visma.ai/v1/document:annotate`
 
+Access endpoints are located at 
+
+- Staging: `https://api.stag.ssn.visma.ai/v1/access/valetkey`
+- Production: `https://api.prod.ssn.visma.ai/v1/access/valetkey`
+
 ### Authentication
 Authentication is done using a bearer token, set it in the Authorization header as follows.
 
 ```http
 Authorization: Bearer Token
 ```
+
+You can use an API token for server to server communication, and you can issue a valet key for use by mobile/web clients. Please do not put your api token into an untrusted client like a mobile application!
+
+For a mobile/web application, you should authenticate the application as you do today, and call our Access API (server side) to issue a valet key that the application can use to talk to smartscan on your behalf. 
+
+For Visma assets, we have a deep dive on client authentication on [Confluence](https://confluence.visma.com/display/VML/Solution+Design%3A+Authentication%2C+Client-side+API+Calls).
+
+### Valet Key Request
+
+You provide an list of tags and get back a token.
+
+The tags will later be used for tagging any data stored by smartscan, so you can later delete said data for GDPR compliance. We recommend using tags like agreement numbers, user ids etc.
+
+You will get back an ID and a Token. The ID is not currently used, but we plan to support revoking tokens by ID.
+
+```json
+POST /v1/access/valetkey HTTP/2
+Host: api.stag.ssn.visma.ai
+User-Agent: curl/7.54.0
+Accept: */*
+Authorization: Bearer demo
+content-type: application/json
+
+{"tags":["foo","userid:1234"]}
+
+
+HTTP/2 200
+content-type: application/json
+grpc-metadata-content-type: application/grpc
+date: Thu, 27 Jun 2019 10:34:34 GMT
+server: envoy
+
+{"id":"50f4b3ad-865b-4be8-8462-d5e9337f2f15","token":"eyJhb...oXA"}
+```
+
 
 ### Rate limiting
 All users of the API will be limited to *300* requests per rolling minute. This is enforced on a per token level. A portion of
