@@ -37,7 +37,9 @@ Authorization: Bearer Token
 
 You can use an API token for server to server communication, and you can issue a valet key for use by mobile/web clients. Please do not put your api token into an untrusted client like a mobile application!
 
-For a mobile/web application, you should authenticate the application as you do today, and call our Access API (server side) to issue a valet key that the application can use to talk to smartscan on your behalf. 
+For a mobile/web application, you have two options; either call our Access API (server side) to issue a valet key that the application can use to talk to smartscan on your behalf, or if you have an OpenID Connect based identity provider (ie. Visma Connect) you can reuse existing authentication.
+
+Reusing existing authentication for mobile will be beneficial both for performance and you can avoid having to do backend work. The flow used on mobile is called "PKCE for OAuth2.0" ([RFC7636](https://tools.ietf.org/html/rfc7636)), and Visma Connect has nice description on [Confluence](https://confluence.visma.com/display/PROV/Visma+Connect+OAuth+2.0+Authorization+Code+Grant+with+PKCE). We support both Access Tokens and Identity Tokens, for ease of use and quick on-boarding. Please note that this technique is not limited to Visma Connect, any OAuth / OpenID Connect provider that exposes a JSON Web Key Endpoint can be used. Contact us on [slack](https://visma.slack.com/messages/CG5LXV5ST) or [email](mailto:vmlsupport@e-conomic.com) if you would like to implement this flow. 
 
 For Visma assets, we have a deep dive on client authentication on [Confluence](https://confluence.visma.com/display/VML/Solution+Design%3A+Authentication%2C+Client-side+API+Calls).
 
