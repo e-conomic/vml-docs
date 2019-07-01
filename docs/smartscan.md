@@ -45,11 +45,13 @@ For Visma assets, we have a deep dive on client authentication on [Confluence](h
 
 ### Valet Key Request
 
-You provide an list of tags and get back a token.
+You provide a sub(ject) and get back a token. The subject is optional, but highly recommended.
 
-The tags will later be used for tagging any data stored by smartscan, so you can later delete said data for GDPR compliance. We recommend using tags like agreement numbers, user ids etc.
+The subject will later be used for tagging any data stored by smartscan, so you can later delete said data for GDPR compliance. You will be able to add additional tags when we store the data.
 
 You will get back an ID and a Token. The ID is not currently used, but we plan to support revoking tokens by ID.
+
+You can set a custom expiration date by providing an unix timestamp in the field "exp", but it has to be less than 48 hours in the future. We only support short lived tokens for the valet key flow. The default expiry is 8 hours.
 
 ```json
 POST /v1/access/valetkey HTTP/2
@@ -59,7 +61,7 @@ Accept: */*
 Authorization: Bearer demo
 content-type: application/json
 
-{"tags":["foo","userid:1234"]}
+{"sub":"1234"}
 
 
 HTTP/2 200
