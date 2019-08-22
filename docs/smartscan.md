@@ -92,6 +92,13 @@ Every API response will return the following rate limit headers
 The caller can choose either to send the document data as part of the request.
 key field`content` is the document data base64 encoded.
 
+NOTE: In addition to standard base64, your standard library probably defines a version of base64 intended
+specifically for email/MIME applications - which adds line breaks every 76 characters. 
+Since this isn't email we don't support MIME-centric base64 - but [rfc4648](https://tools.ietf.org/html/rfc4648) base64.
+For Java developers this means you should use the `Basic` encoder from `java.util.Base64` not the `MIME` encoder.
+For .NET developers it means you should avoid the `InsertLineBreaks` option for `System.Convert.ToBase64String`.
+For other platforms - consult the documentation.
+
 ```json
 {
     "document": {
