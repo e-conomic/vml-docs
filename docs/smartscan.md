@@ -23,7 +23,7 @@ Annotator endpoints are located at
 - Staging: `https://api.stag.ssn.visma.ai/v1/document:annotate`
 - Production: `https://api.prod.ssn.visma.ai/v1/document:annotate`
 
-Access endpoints are located at 
+Access endpoints are located at
 
 - Staging: `https://api.stag.ssn.visma.ai/v1/access/valetkey`
 - Production: `https://api.prod.ssn.visma.ai/v1/access/valetkey`
@@ -39,7 +39,7 @@ You can use an API token for server to server communication, and you can issue a
 
 For a mobile/web application, you have two options; either call our Access API (server side) to issue a valet key that the application can use to talk to smartscan on your behalf, or if you have an OpenID Connect based identity provider (ie. Visma Connect) you can reuse existing authentication.
 
-Reusing existing authentication for mobile will be beneficial both for performance and you can avoid having to do backend work. The flow used on mobile is called "PKCE for OAuth2.0" ([RFC7636](https://tools.ietf.org/html/rfc7636)), and Visma Connect has nice description on [Confluence](https://confluence.visma.com/display/PROV/Visma+Connect+OAuth+2.0+Authorization+Code+Grant+with+PKCE). We support both Access Tokens and Identity Tokens, for ease of use and quick on-boarding. Please note that this technique is not limited to Visma Connect, any OAuth / OpenID Connect provider that exposes a JSON Web Key Endpoint can be used. Contact us on [slack](https://visma.slack.com/messages/CG5LXV5ST) or [email](mailto:vmlsupport@e-conomic.com) if you would like to implement this flow. 
+Reusing existing authentication for mobile will be beneficial both for performance and you can avoid having to do backend work. The flow used on mobile is called "PKCE for OAuth2.0" ([RFC7636](https://tools.ietf.org/html/rfc7636)), and Visma Connect has nice description on [Confluence](https://confluence.visma.com/display/PROV/Visma+Connect+OAuth+2.0+Authorization+Code+Grant+with+PKCE). We support both Access Tokens and Identity Tokens, for ease of use and quick on-boarding. Please note that this technique is not limited to Visma Connect, any OAuth / OpenID Connect provider that exposes a JSON Web Key Endpoint can be used. Contact us on [slack](https://visma.slack.com/messages/CG5LXV5ST) or [email](mailto:vmlsupport@e-conomic.com) if you would like to implement this flow.
 
 For Visma assets, we have a deep dive on client authentication on [Confluence](https://confluence.visma.com/display/VML/Solution+Design%3A+Authentication%2C+Client-side+API+Calls).
 
@@ -76,7 +76,7 @@ server: envoy
 
 ### Rate limiting
 All users of the API will be limited to *300* requests per rolling minute. This is enforced on a per token level. A portion of
-the 300 requests are for bursts of traffic. 
+the 300 requests are for bursts of traffic.
 
 Every API response will return the following rate limit headers
 
@@ -93,7 +93,7 @@ The caller can choose either to send the document data as part of the request.
 key field`content` is the document data base64 encoded.
 
 NOTE: In addition to standard base64, your platform standard library probably defines a version of base64 intended
-specifically for email/MIME applications - which adds line breaks every 76 characters. 
+specifically for email/MIME applications - which adds line breaks every 76 characters.
 Since this isn't email we don't support MIME-centric base64 - but [rfc4648](https://tools.ietf.org/html/rfc4648) base64.
 For Java developers this means you should use the `Basic` encoder from `java.util.Base64` not the `MIME` encoder.
 For .NET developers it means you should avoid the `InsertLineBreaks` option for `System.Convert.ToBase64String`.
@@ -369,8 +369,108 @@ x-ratelimit-reset: 0
 ```
 ### Results
 Results for each field is returned sorted by their confidence level going from the most confident to the least confident.
-#### Additional info on credit card last four-
+#### Additional info on credit card last four
 At the moment the credit_card_last_four feature does not have boundary boxes as we do not have data to train for this feature, predictions for this features is therefore solved in a different manner, first priority was to be able to predict the field, secondly we will find a way to add boundary boxes.
+
+
+### Feedback
+A feedback id is returned when annotating documents, this ID can be used to provide feedback. The feedback data will be used to generate stats regarding the results provided by smartscan and how end users interact with these results. As well as continous training of our models, to be able to provide increasingly god results.
+
+### Provide feedback
+Providing feedback is available for all succesfully annotated documents, within 24 hours of the annotation, this limit may be made longer if needed. Providing feedback for a document after 24 hours will result in a 404 not found, as will feedback provided for a document that already has had feedback provided. Quickly doing multiple feedback calls for the same document might result in a 409 CONFLICT for some of the calls, and subsequently will result in 404 errors when the first call completes and temporary stored data is removed.
+
+```json
+POST /v1alpha1/feedback:create HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Authorization: Bearer ***************************
+Connection: keep-alive
+Content-Length: 500
+Content-Type: application/json
+Host: api.stag.ssn.visma.ai
+User-Agent: HTTPie/0.9.9
+
+{
+    "id": "65226d1b-1c70-425c-9288-a29106928ef2",
+    "tags": [
+        "foo",
+        "bar",
+        "baz",
+        "qux"
+    ],
+    "true_values": {
+        "currency": "DKK",
+        "invoice_number": "1202942",
+        "order_date": {
+            "day": 1,
+            "month": 1,
+            "year": 2019
+        },
+        "payment_due_date": {
+            "day": 1,
+            "month": 1,
+            "year": 2019
+        },
+        "total_excl_vat": 225.0,
+        "total_incl_vat": 300.0,
+        "total_vat": 75.0
+    }
+}
+
+HTTP/1.1 200 OK
+Alt-Svc: clear
+Content-Length: 2
+Via: 1.1 google
+content-type: application/json
+date: Wed, 25 Sep 2019 13:24:03 GMT
+grpc-message:
+grpc-status: 0
+server: envoy
+x-envoy-decorator-operation: dataservice.ssn.svc.cluster.local:50051/*
+x-envoy-upstream-service-time: 1055
+
+{}
+```
+
+### Delete feedback
+To help ensure GDPR compliance we offer a delete endpoint with which you can delete all data related to a customer. Due to the nature of the way data is inserted in our database, we can't delete data within the first 90 minutes of insertion therefore all delete calls will be processed accordingly in a delayed job. An endpoint or webhook like feature will be provided.
+
+Deletes are done by the tags defined in your feedback call, if you define more than one tag all data that has one or more than one matching tag will be deleted.
+e.g. `"tags": ["foo", "bar"]` will delete all feedback data that has either foo or bar in their tags. Ideally this will be used to batch delete calls to us, so you can call with `"tags": ["customer1", "customer2",...,"customerX"]` to delete all data related to these customers.
+
+```json
+POST /v1alpha1/feedback:delete HTTP/1.1
+Accept: application/json, */*
+Accept-Encoding: gzip, deflate
+Authorization: Bearer ***************************
+Connection: keep-alive
+Content-Length: 24
+Content-Type: application/json
+Host: api.stag.ssn.visma.ai
+User-Agent: HTTPie/0.9.9
+
+{
+    "tags": [
+        "foo",
+        "bar"
+    ]
+}
+
+HTTP/1.1 200 OK
+Alt-Svc: clear
+Content-Length: 2
+Via: 1.1 google
+content-type: application/json
+date: Wed, 25 Sep 2019 13:04:21 GMT
+grpc-message:
+grpc-status: 0
+server: envoy
+x-envoy-decorator-operation: dataservice.ssn.svc.cluster.local:50051/*
+x-envoy-upstream-service-time: 5248
+
+{}
+```
+
 
 
 ### Code examples
