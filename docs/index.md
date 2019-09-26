@@ -11,9 +11,6 @@ By applying machines to automate previously manual processes, we can free up tim
 
 ## The VML Team
 
-!!! todo
-    Write a short presentation of us
-
 We have two main products, Smartscan and Autosuggest.
 
 ## Smartscan

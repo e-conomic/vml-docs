@@ -28,6 +28,11 @@ Access endpoints are located at
 - Staging: `https://api.stag.ssn.visma.ai/v1/access/valetkey`
 - Production: `https://api.prod.ssn.visma.ai/v1/access/valetkey`
 
+Feedback endpoints are located at
+
+- Staging: `https://api.stag.ssn.visma.ai/v1/feedback:create` and `https://api.stag.ssn.visma.ai/v1/feedback:delete`
+- Production: `https://api.prod.ssn.visma.ai/v1/feedback:create` and `https://api.prod.ssn.visma.ai/v1/feedback:delete`
+
 ### Authentication
 Authentication is done using a bearer token, set it in the Authorization header as follows.
 
@@ -374,7 +379,7 @@ At the moment the credit_card_last_four feature does not have boundary boxes as 
 
 
 ### Feedback
-A feedback id is returned when annotating documents, this ID can be used to provide feedback. The feedback data will be used to generate stats regarding the results provided by smartscan and how end users interact with these results. As well as continous training of our models, to be able to provide increasingly god results.
+A feedback id is returned when annotating documents, this ID can be used to provide feedback. The feedback data will be used to generate stats regarding the results provided by smartscan and how end users interact with these results. As well as continous training of our models.
 
 ### Provide feedback
 Providing feedback is available for all succesfully annotated documents, within 24 hours of the annotation, this limit may be made longer if needed. Providing feedback for a document after 24 hours will result in a 404 not found, as will feedback provided for a document that already has had feedback provided. Quickly doing multiple feedback calls for the same document might result in a 409 CONFLICT for some of the calls, and subsequently will result in 404 errors when the first call completes and temporary stored data is removed.
