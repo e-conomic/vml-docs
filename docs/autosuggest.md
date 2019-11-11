@@ -162,9 +162,10 @@ Training time depends on the size of the dataset, specifically the number of cla
 ### Uploading Examples
 
 There are many ways to upload data to S3, and most languages have SDKs (if not several) for AWS services - or at very least just to S3. Below we have simple code examples of how you could upload data.
+Remember to add the aws kms key `alias/asgt/default`.
 
 ``` shell tab="Shell"
-$ aws s3 cp jit.pb s3://asgt.dataset.production/bru/electronic-invoice-line/
+$ aws s3 cp jit.pb s3://asgt.dataset.production/bru/electronic-invoice-line/ --sse aws:kms --sse-kms-key-id alias/asgt/default
 ```
 
 ``` python tab="Python"
