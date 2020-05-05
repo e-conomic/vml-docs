@@ -58,6 +58,7 @@ The supported data types are the following
 
 This is the simplest type of data sample. On the input side 
 
+#### Example
 ```json
 {'text': 'OCR text of a document - or other text you have on record'}
 ```
@@ -67,6 +68,7 @@ This is the simplest type of data sample. On the input side
 * Description text for the bank transaction
 * Amount - presented as a floar
 
+#### Example
 ```json
 {'text': 'Bank statement text info', amount: 17.50}
 ```
@@ -84,6 +86,7 @@ An aggregate of invoice level and line level information
 * Line text - Could be Item.Description and/or InvoiceLine.Item.Name and/or InvoiceLine.Item.InvoicedQuantity
 * Line ID - A global product id - eg. InvoiceLine.Item.StandardItemIdentification in the Peppol specifications
 
+#### Example
 ```json
 {
   issue_date: 1588679867,
@@ -128,17 +131,48 @@ For now, we refer to [Smartscan's documentation on authentication](smartscan#Aut
 ### /&lt;type&gt;:create
 
 Creates a new named dataset. You may optionally include a first patch of training samples to the dataset on creation. 
+
+#### Summary of request body
+Entries left out for brevity
 ```json
 {
     dataset_name: 'a unique string', 
     tags: ['atag', 'anothertag'],
-    retention_policy: '',
+    retention_policy: {max_days: 30},
     entries: [...]
 }
 ```
 
 ### /&lt;type&gt;:append
 
+Appends entries to a data set
+
+#### Summary of request body
+Entries left out for brevity
+```json
+{
+    dataset_name: 'a unique string', 
+    entries: [...]
+}
+```
+
+### /&lt;type&gt;:predict
+
+Predict against a dataset - you may ask for predictions against a list of entries of the type chosen. 
+You may - optionally - ask for multiple answers - useful in certain UX scenarios (e.g. filling lists - or getting a higher throughput)
+
+The inputs should be in the same format as the `data` element for the dataset samples.
+
+#### Summary of request body
+Inputs left out for brevity
+```json
+{
+        "inputs": [...],
+        "dataset_name": 'a unique string,
+        "options": {
+            "suggestion_limit": 2,
+        }
+    }```
 
 ### /&lt;type&gt;:delete
 

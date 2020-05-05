@@ -3,7 +3,7 @@ nav:
 - Getting Started: index.md
 - Smartscan: smartscan.md
 - Autosuggest: autosuggest.md
-- *NEW* Autosuggest 2.0: autosuggest2.md
+- Autosuggest 2.0: autosuggest2.md
 - Support: support.md
 theme:
   name: 'material'
