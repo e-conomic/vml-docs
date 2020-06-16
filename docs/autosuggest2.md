@@ -63,7 +63,7 @@ The full schema looks like below - but for each model only a subset of the field
            amount: 17.5
        },
        invoice: {
-           issue_date: 1591907550,
+           issue_date: '2018-07-18T12:32:55Z' ,
            currency: 'DKK',
            supplier: {
                id: '123',
@@ -129,7 +129,7 @@ This is the simplest type of data sample. On the input side
 An aggregate of invoice level and line level information
 
 #### Invoice fields
-* Issue date - presented as a unix timestamp 
+* Issue date - presented as a timestamp in text format
 * Customer Reference - i.e. any data identifying recipient could be `Invoice.AccountingCustomerParty.Party.PartyName` in the Peppol specifications
 * Total - presented as a float
 * Currency - standard three letter code
@@ -149,7 +149,7 @@ This denormalization aligns the data better with the data science process intern
 ```json
 {
     invoice: {
-        issue_date: 1588679867,
+        issue_date: “2018-07-18T12:32:55Z” 
         customer_ref: 'roadrunner@acme.inc',
         currency: 'DKK',
         total: 99.99,
@@ -160,7 +160,7 @@ This denormalization aligns the data better with the data science process intern
         }
     },
     invoice_line: {
-        line_text: '1 TNT prevention device',
+        text: '1 TNT prevention device',
         line_id: '12345',
     }
 }
