@@ -45,6 +45,7 @@ That's it! There are no more steps involved - no need to set up a training loop 
 The AutoSuggest models come in three flavors - they support different fields based on different data available on different types of transaction.
 
 The three types of model are
+
 * Bank Transactions - Predictions based on information available in a standard bank transaction export
 * Scanned invoices - Predictions based on information available from Smartscan (i.e. document text)
 * Electronic Invoice Lines - Predictions based on information available in electronic invoices
@@ -63,6 +64,7 @@ The full schema looks like below - but for each model only a subset of the field
        },
        invoice: {
            issue_date: 1591907550,
+           currency: 'DKK',
            supplier: {
                id: '123',
                name: 'Acme Inc',
@@ -73,8 +75,6 @@ The full schema looks like below - but for each model only a subset of the field
            total: 12.5
        },
        invoice_line: {
-           currency: 'DKK',
-           amount: 10.2,
            text: 'Line product text description',
            item_id: 'A product ID if one exists'
        }
@@ -132,15 +132,14 @@ An aggregate of invoice level and line level information
 * Issue date - presented as a unix timestamp 
 * Customer Reference - i.e. any data identifying recipient could be `Invoice.AccountingCustomerParty.Party.PartyName` in the Peppol specifications
 * Total - presented as a float
+* Currency - standard three letter code
 #### Supplier fields
 * Supplier ID - your local database of the supplier
 * Supplier name
 * Global Supplier ID - e.g. the official VAT number of supplier
 #### Invoice line fields
-* Currency - standard three letter code
 * Line text - Could be Item.Description and/or InvoiceLine.Item.Name and/or InvoiceLine.Item.InvoicedQuantity
 * Line ID - A global product id - eg. InvoiceLine.Item.StandardItemIdentification in the Peppol specifications
-* Amount - Line amount, presented as a float
 
 Please be aware that you need to submit _each_ line as an individual sample - and for each sample, you need to present
 the invoice level information. 
@@ -152,6 +151,7 @@ This denormalization aligns the data better with the data science process intern
     invoice: {
         issue_date: 1588679867,
         customer_ref: 'roadrunner@acme.inc',
+        currency: 'DKK',
         total: 99.99,
         supplier: {
             id: '123',
@@ -160,10 +160,8 @@ This denormalization aligns the data better with the data science process intern
         }
     },
     invoice_line: {
-        currency: 'DKK',
         line_text: '1 TNT prevention device',
         line_id: '12345',
-        amount: 12.12
     }
 }
 ```
@@ -218,13 +216,13 @@ Creates a new named dataset. You may optionally include a first patch of trainin
 Names of datasets are local to the consumer _and_ the model type. So the bank dataset `foo` is distinct from the scanned-invoice dataset `foo`. 
 
 #### Summary of request body
-Entries left out for brevity
+Samples left out for brevity
 ```json
 {
     name: 'a-unique-string', 
     tags: ['atag', 'anothertag'],
     retention_policy: {max_days: 30},
-    entries: [...]
+    samples: [...]
 }
 ```
 
@@ -236,10 +234,10 @@ they should be `/`-free path fragments. If you limit yourself to `[a-z,0-9,-]` y
 
 ### /&lt;type&gt;/&lt;name&gt;:append
 
-Appends entries to a data set
+Appends samples to a data set
 
 #### Summary of request body
-Entries left out for brevity
+Samples left out for brevity
 
 ```json
 {
@@ -331,10 +329,9 @@ Or
 ### /&lt;type&gt;/&lt;name&gt;:info
 
 Get basic health info about a particular dataset. Size of set, last update, and model training status
-```json
-{
-}
-```
+
+This is the API's only `GET` request. So no request body....
+
 #### Example output
 
 ```json
@@ -367,11 +364,11 @@ To avoid needless retraining on multiple append requests there's a brief timeout
 #### Training on create
 
 When creating a dataset - and including data in the create request - a training session will be started within 1 minute. 
-If you append data to the dataset within the first minute - the logic for training on append will kick on.
+If you append data to the dataset within the first minute - an extra minute will be added to the wait up to a maximum of 5 minutes. 
 
 #### Training on append
 
-When you append data to a dataset - a training will be kicked off within 1 hour of the append. If you append during this time window, the training will be postponed for an additional hour - up to a maximum delay of 5 hours. 
+When you append data to a dataset - a training will be kicked off within 1 hour of the append. If you append during this time window, the training will be postponed for an additional hour - up to a maximum delay of 6 hours. 
 
 ### Debugging
 
