@@ -1,5 +1,10 @@
 # Autosuggest <small>for intelligent ERP systems</small>
 
+!!! Deprecation warning
+    This version of the AutoSuggest API is deprecated. If you're starting a
+    new AutoSuggest project now - you should use the [new API](autosuggest2)
+    instead. 
+
 ## Automate ERP Workflows
 Autosuggest is a set of web APIs developed to aid automation in ERP systems.
 Often customers of ERP systems are performing the same tasks many times a day,
