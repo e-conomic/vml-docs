@@ -56,7 +56,7 @@ The full schema looks like below - but for each model only a subset of the field
 
 ```json
 {
-   target_values: [{target: 'My Target Name', value: 'A value'},...],
+   target_values: [{name: 'My Target Name', value: 'A value'},...],
    data: {
        transaction: {
            text: 'line text',
