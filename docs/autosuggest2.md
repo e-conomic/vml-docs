@@ -258,7 +258,7 @@ Inputs left out for brevity
 
 ```json
 {
-    samples: [...],
+    inputs: [...],
     options: {
         suggestion_limit: 2,
     }
