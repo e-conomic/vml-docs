@@ -187,9 +187,6 @@ https://portal.stag.vml.visma.ai/
 
 #### Production
 
-!!! Future
-| The beta API will be available in production in june 2020.
-
 Use this API for, you know, production use - and real customer data
 
 ```
@@ -241,7 +238,6 @@ Samples left out for brevity
 
 ```json
 {
-    name: 'a-unique-string', 
     samples: [...]
 }
 ```
@@ -262,8 +258,7 @@ Inputs left out for brevity
 
 ```json
 {
-    inputs: [...],
-    name: 'a-unique-string',
+    samples: [...],
     options: {
         suggestion_limit: 2,
     }
