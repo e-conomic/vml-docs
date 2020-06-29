@@ -1,7 +1,5 @@
 # AutoSuggest 2.0
 
-AutoSuggest 2.0 is a complete rewrite of AutoSuggest - it is not backward compatible with the previous versions - but very similar in spirit. 
-
 !!! Beta release
 | AutoSuggest 2.0 is currently in beta. This means we believe that the API will stay in it's current form
 
@@ -177,12 +175,14 @@ Two environments are available. Staging and production.
 Use this environment for development, and testing - even automated integration tests. API base url is
 
 ```
-https://api.stag.asgt.visma.ai/
+https://api.stag.asgt.visma.ai/v1/
 ```
+
+So in our staging environment, the full URL for the bank:create call is `https://api.stag.asgt.visma.ai/v1/bank:create`
 
 The portal, our web front for user and token manegement, metrics dashboards, sample code and other developer tools, is at
 ```
-https://portal.stag.vml.visma.ai/
+https://portal.stag.vml.visma.ai/v1/
 ```
 
 #### Production
@@ -192,6 +192,8 @@ Use this API for, you know, production use - and real customer data
 ```
 https://api.asgt.visma.ai/
 ```
+
+So in our production environment, the full URL for the bank:create call is `https://api.asgt.visma.ai/v1/bank:create`
 
 The portal, our web front for user and token manegement, metrics dashboards, sample code and other developer tools, is at
 ```
