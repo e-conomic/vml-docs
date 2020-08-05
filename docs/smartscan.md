@@ -440,8 +440,10 @@ x-envoy-upstream-service-time: 1055
 {}
 ```
 
-### Delete feedback
-To help ensure GDPR compliance we offer a delete endpoint with which you can delete all data related to a customer. Due to the nature of the way data is inserted in our database, we can't delete data within the first 90 minutes of insertion therefore all delete calls will be processed accordingly in a delayed job. An endpoint or webhook like feature will be provided.
+### Data Deletion Policy and Deleting feedback
+The VML team will only use the provided feedback data, to improve the system performance, as long as a consumer is using our service. If a consumer of the SmartScan API terminates their use of the service, this should be communicated to the VML team. We will then delete all feedback previously added through the API, no later than 90 days after the request. See the [Support section](http://docs.vml.visma.ai/support/) for details on how to contact. Visma Owned data is deleted three years after creation through the feedback endpoint, and all data is deleted at the end-of-life of the SmartScan service.
+
+If an end-user of one of our consumers terminates their customer contract, it is the responsibility of the API consumer to delete this data from the SmartScan feedback store. To help ensure GDPR compliance we offer a delete endpoint with which you can delete all data related to a customer. Due to the nature of the way data is inserted in our database, we can't delete data within the first 90 minutes of insertion therefore all delete calls will be processed accordingly in a delayed job.
 
 Deletes are done by the tags defined in your feedback call, if you define more than one tag all data that has one or more than one matching tag will be deleted.
 e.g. `"tags": ["foo", "bar"]` will delete all feedback data that has either foo or bar in their tags. Ideally this will be used to batch delete calls to us, so you can call with `"tags": ["customer1", "customer2",...,"customerX"]` to delete all data related to these customers.
