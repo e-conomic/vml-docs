@@ -388,7 +388,7 @@ A feedback id is returned when annotating documents, this ID can be used to prov
 Providing feedback is available for all succesfully annotated documents, within 24 hours of the annotation, this limit may be made longer if needed. Providing feedback for a document after 24 hours will result in a 404 not found, as will feedback provided for a document that already has had feedback provided. Quickly doing multiple feedback calls for the same document might result in a 409 CONFLICT for some of the calls, and subsequently will result in 404 errors when the first call completes and temporary stored data is removed.
 
 ```json
-POST /v1alpha1/feedback:create HTTP/1.1
+POST /v1/feedback:create HTTP/1.1
 Accept: application/json, */*
 Accept-Encoding: gzip, deflate
 Authorization: Bearer ***************************
@@ -449,7 +449,7 @@ Deletes are done by the tags defined in your feedback call, if you define more t
 e.g. `"tags": ["foo", "bar"]` will delete all feedback data that has either foo or bar in their tags. Ideally this will be used to batch delete calls to us, so you can call with `"tags": ["customer1", "customer2",...,"customerX"]` to delete all data related to these customers.
 
 ```json
-POST /v1alpha1/feedback:delete HTTP/1.1
+POST /v1/feedback:delete HTTP/1.1
 Accept: application/json, */*
 Accept-Encoding: gzip, deflate
 Authorization: Bearer ***************************
