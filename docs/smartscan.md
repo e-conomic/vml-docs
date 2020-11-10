@@ -137,34 +137,37 @@ VERY_HIGH, HIGH, MID, LOW, VERY_LOW
 
 The caller can specify which prediction operations he wants the api to perform. The full list of features are
 
-```
-ORDER_DATE
-PAYMENT_DUE_DATE
-CURRENCY
-TOTAL_VAT
-TOTAL_INCL_VAT
-TOTAL_EXCL_VAT
-SUPPLIER_CORPORATE_ID
-SUPPLIER_COUNTRY_CODE
-DOCUMENT_TYPE
-PAYMENT_METHOD
-CREDIT_CARD_LAST_FOUR
-INVOICE_NUMBER
-OCR_LINE_DK_TYPE
-OCR_LINE_DK_PAYMENT_ID
-OCR_LINE_DK_CREDITOR_ID
-OCR_LINE_SE_PAYMENT_ID
-OCR_LINE_SE_BANKGIRO_CREDITOR_ID
-OCR_LINE_SE_PLUSGIRO_CREDITOR_ID
-OCR_LINE_NO_PAYMENT_ID
-OCR_LINE_FI_PAYMENT_ID
-OCR_LINE_NL_PAYMENT_ID
-TEXT
-IBAN
-LINES
-PREVIEW
-DEFAULT
-```
+| Feature name                         | Description                                                   |
+|--------------------------------------|---------------------------------------------------------------|
+|ORDER_DATE                            | Invoice Date/Document date                                    |
+|PAYMENT_DUE_DATE                      | Payment date (No support for inferred dates (e.g. `8 days`)   |
+|CURRENCY                              | Three letter currency code                                    |
+|TOTAL_VAT                             |                                                               |
+|TOTAL_INCL_VAT                        |                                                               |
+|TOTAL_EXCL_VAT                        |                                                               |
+|SUPPLIER_CORPORATE_ID                 | Organization number of supplier (typically the EU Vat number) |
+|SUPPLIER_COUNTRY_CODE                 | Two letter country code                                       |
+|DOCUMENT_TYPE                         | Answer is either `Invoice` or `receipt`                       |
+|PAYMENT_METHOD                        | Cash or credit card  (heuristic)                              |
+|CREDIT_CARD_LAST_FOUR                 | For receipts, the 4 last digits of card if present (heuristic)|
+|INVOICE_NUMBER                        |                                                               |
+|OCR_LINE_DK_TYPE                      | FIK Type field                                                |
+|OCR_LINE_DK_PAYMENT_ID                | FIK Debitor or payment reference                              |
+|OCR_LINE_DK_CREDITOR_ID               | FIK Account number                                            |
+|OCR_LINE_SE_PAYMENT_ID                |                                                               |
+|OCR_LINE_SE_BANKGIRO_CREDITOR_ID      |                                                               |
+|OCR_LINE_SE_PLUSGIRO_CREDITOR_ID      |                                                               |
+|OCR_LINE_NO_PAYMENT_ID                | KID number                                                    |
+|OCR_LINE_FI_PAYMENT_ID                |                                                               |
+|OCR_LINE_NL_PAYMENT_ID                |                                                               |
+|IBAN                                  | IBAN code. (heuristic)                                        |
+|TEXT                                  | The full ASCII text of the document                           |
+|TEXT_ANNOTATION                       | The full OCR output for the document                          |
+|LINES                                 | Line text for invoice lines (heuristic, experimental)         |
+|PREVIEW                               | Base64 encoded rendering of first page of pdfs                |
+|DEFAULT                               | A selection of frequently useful fields - see below           |
+
+Heuristic indicates that the fields is returned using pattern matching, not a trained ML model.
 
 The `DEFAULT` feature includes the following fields
 
@@ -184,7 +187,7 @@ INVOICE_NUMBER
 ```
 
 For each feature the caller can set `maxResults` (defaults to 1) and `minConfidence` (defaults to `HIGH`).
-If both `DEFAULT` and a specific feature is set, the specific feautre will take precedence.
+If both `DEFAULT` and a specific feature is set, the (settings for the) specific feature will take precedence.
 
 See the example below.
 
