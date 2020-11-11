@@ -21,10 +21,6 @@ install:
 script:
 - mkdocs build
 before_deploy:
-- echo $QUAY_PASSWORD | docker login -u $QUAY_USERNAME --password-stdin quay.io
-- docker build -t economic/vml-docs .
-- docker tag economic/vml-docs quay.io/economic/vml-docs:latest
-- docker tag economic/vml-docs quay.io/economic/vml-docs:$TRAVIS_BUILD_NUMBER
 - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; curl https://sdk.cloud.google.com | bash; fi
 # Add gcloud to $PATH
 - source /home/travis/google-cloud-sdk/path.bash.inc
@@ -34,11 +30,6 @@ before_deploy:
 - echo $GCLOUD_KEY | base64 --decode > gcloud.p12
 - gcloud auth activate-service-account $GCLOUD_EMAIL --key-file gcloud.p12
 deploy:
-  - provider: script
-    script: docker push quay.io/economic/vml-docs:latest &&
-            docker push quay.io/economic/vml-docs:$TRAVIS_BUILD_NUMBER
-    on:
-      branch: master
   - provider: script
     script: gsutil rsync -r site gs://vml-docs
     skip_cleanup: true
