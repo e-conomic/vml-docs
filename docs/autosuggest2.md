@@ -188,7 +188,7 @@ https://portal.stag.vml.visma.ai/v1/
 Use this API for, you know, production use - and real customer data
 
 ```
-https://api.prod.asgt.visma.ai/
+https://api.prod.asgt.visma.ai/v1/
 ```
 
 So in our production environment, the full URL for the bank:create call is `https://api.prod.asgt.visma.ai/v1/bank:create`
