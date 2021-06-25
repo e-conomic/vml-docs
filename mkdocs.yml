@@ -1,10 +1,11 @@
 site_name: VML Docs
 nav:
-- Getting Started: index.md
-- Smartscan: smartscan.md
-- Autosuggest: autosuggest.md
-- Autosuggest 2.0: autosuggest2.md
-- Support: support.md
+  - Getting Started: index.md
+  - Smartscan: smartscan.md
+  - Autosuggest: autosuggest.md
+  - Autosuggest 2.0: autosuggest2.md
+  - New Autosuggest 2.0: autosuggest2new.md
+  - Support: support.md
 theme:
   name: 'material'
   custom_dir: 'theme'
@@ -13,15 +14,22 @@ theme:
     accent: 'teal'
   feature:
     tabs: false
-
 markdown_extensions:
-- codehilite
-- toc:
-    permalink: true
-- admonition
-- pymdownx.superfences
-- pymdownx.tasklist
-- markdown.extensions.attr_list:
+  - codehilite
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - markdown.extensions.attr_list:
+
+plugins:
+  - render_swagger
 
 extra_css:
-- stylesheets/extra.css
+  - stylesheets/extra.css
+  - stylesheets/swagger-ui-base.css
+  - stylesheets/swagger-ui.css
+
+extra_javascript:
+  - scripts/swagger-ui.js
