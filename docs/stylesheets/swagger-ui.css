@@ -1722,7 +1722,7 @@
    color: white;
  }
 
- /*
- .swagger-ui .try-out {
-   display: none;
- } */
+
+.swagger-ui .try-out {
+ display: none;
+}
