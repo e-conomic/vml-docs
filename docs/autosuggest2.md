@@ -412,3 +412,6 @@ In case of errors during your implementation - you may finde the GRPC headers fo
 
 You may use the `info` API call to verify that your dataset is alive and well. 
 
+## REST Reference
+
+!!swagger-http https://raw.githubusercontent.com/e-conomic/vmlapis/master/gen/openapiv2/asgt/v1.swagger.json!!

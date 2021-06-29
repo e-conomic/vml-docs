@@ -587,3 +587,7 @@ namespace SmartScanTest
 }
 
 ```
+
+## REST Reference
+
+!!swagger-http https://raw.githubusercontent.com/e-conomic/vmlapis/master/gen/openapiv2/ssn/v1.swagger.json!!
