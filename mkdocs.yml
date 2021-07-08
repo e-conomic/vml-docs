@@ -1,17 +1,17 @@
-site_name: VML Docs
+site_name: ML Assets API Documentation
 nav:
   - Getting Started: index.md
   - Smartscan: smartscan.md
-  - Autosuggest: autosuggest.md
-  - Autosuggest 2.0: autosuggest2.md
-  - New Autosuggest 2.0: autosuggest2new.md
+  - Autosuggest: autosuggest2.md
+  - Autosuggest enhanced API: autosuggest2new.md
+  - Autosuggest Legacy: autosuggest.md
   - Support: support.md
 theme:
   name: 'material'
   custom_dir: 'theme'
   palette:
-    primary: 'teal'
-    accent: 'teal'
+    primary: 'light blue'
+    accent: 'light green'
   feature:
     tabs: false
 markdown_extensions:

@@ -1,6 +1,8 @@
-# AutoSuggest 2.0
-
 ## Quick start
+
+!!! Update notice
+    If you're just onboarding now - consider if the [enhanced API](autosuggest2new) in current development
+    might be a better fit for your workflow
 
 AutoSuggest enables you to learn user behavior and use that to assist your users and improve your user experience.
 Since most of our customers use this to improve transaction processing, the API is geared towards transaction data - but it's easy to use AutoSuggest for more general text prediction problems also. 
@@ -12,9 +14,9 @@ Here's a quick guide
 3. AutoSuggest automatically trains an ML model - when the performance is [good enough](#typenameinfo), 
 4. Implement the prediction call and improve your user experience
 
-## Overview of the new training loop
+## Overview of the training loop
 
-AutoSuggest 2.0 simplifies the ML process to three easy steps
+AutoSuggest simplifies the ML process into three easy steps
 
 ### Before you predict
 
