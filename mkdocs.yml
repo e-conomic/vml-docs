@@ -1,27 +1,35 @@
-site_name: VML Docs
+site_name: ML Assets API Documentation
 nav:
-- Getting Started: index.md
-- Smartscan: smartscan.md
-- Autosuggest: autosuggest.md
-- Autosuggest 2.0: autosuggest2.md
-- Support: support.md
+  - Getting Started: index.md
+  - Smartscan: smartscan.md
+  - Autosuggest: autosuggest2.md
+  - Autosuggest enhanced API: autosuggest2new.md
+  - Autosuggest Legacy: autosuggest.md
+  - Support: support.md
 theme:
   name: 'material'
   custom_dir: 'theme'
   palette:
-    primary: 'teal'
-    accent: 'teal'
+    primary: 'light blue'
+    accent: 'light green'
   feature:
     tabs: false
-
 markdown_extensions:
-- codehilite
-- toc:
-    permalink: true
-- admonition
-- pymdownx.superfences
-- pymdownx.tasklist
-- markdown.extensions.attr_list:
+  - codehilite
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - markdown.extensions.attr_list:
+
+plugins:
+  - render_swagger
 
 extra_css:
-- stylesheets/extra.css
+  - stylesheets/extra.css
+  - stylesheets/swagger-ui-base.css
+  - stylesheets/swagger-ui.css
+
+extra_javascript:
+  - scripts/swagger-ui.js

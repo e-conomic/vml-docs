@@ -1,4 +1,3 @@
-# Autosuggest <small>for intelligent ERP systems</small>
 
 !!! Deprecation warning
     This version of the AutoSuggest API is deprecated. If you're starting a
